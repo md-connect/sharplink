@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>About</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 </head>
+
 <body class="animsition">
-	
+
 	<!-- Header -->
-	<header class="header-v4">
+	<header>
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						Free shipping for standard order around Okokomaiko Axis
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
@@ -51,21 +53,21 @@
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							USD
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>
 
-			<div class="wrap-menu-desktop how-shadow1">
+			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
-					
-					<!-- Logo desktop -->		
+
+					<!-- Logo desktop -->
 					<a href="#" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
@@ -75,11 +77,6 @@
 						<ul class="main-menu">
 							<li>
 								<a href="index.php">Home</a>
-								<!-- <ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul> -->
 							</li>
 
 							<li>
@@ -90,41 +87,40 @@
 								<a href="shoping-cart.php">Features</a>
 							</li>
 
-							<li>
-								<a href="blog.php">Blog</a>
-							</li>
-
 							<li class="active-menu">
-								<a href="about.php">About</a>
+								<a href="about.php">About Us</a>
 							</li>
 
 							<li>
-								<a href="contact.php">Contact</a>
-							</li>
-						</ul>
-					</div>	
+								<a href="contact.php">Contact Us</a>
+							</li </ul> </div> <!-- Icon header -->
+							<div class="wrap-icon-header flex-w flex-r-m">
+								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+									<i class="zmdi zmdi-search"></i>
+								</div>
 
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
+								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+									<i class="zmdi zmdi-shopping-cart"></i>
+								</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
+								<!-- <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+									<i class="zmdi zmdi-favorite-outline"></i>
+									</a> -->
+								<ul>
+									<li>
+										<a href="login.php">Login | Sign Up</a>
+									</li>
+								</ul>
+								<!-- <a href="contact.html">Login | Sign Up</a> -->
+							</div>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
-					</div>
 				</nav>
-			</div>	
+			</div>
 		</div>
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
-			<!-- Logo moblie -->		
+			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="index.php"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
@@ -139,9 +135,9 @@
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+				<!-- 	<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
 					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+				</a> -->
 			</div>
 
 			<!-- Button show menu -->
@@ -158,26 +154,16 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						Free shipping for standard order around Okokomaiko Axis
 					</div>
-				</li>
 
-				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							My Account
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
 						</a>
 					</div>
 				</li>
@@ -186,34 +172,26 @@
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-					<!-- <ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span> -->
 				</li>
 
 				<li>
 					<a href="product.php">Shop</a>
 				</li>
 
-				<li>
-					<a href="shoping-cart.php" class="label1 rs1" data-label1="hot">Features</a>
+				<li class="label1" data-label1="hot">
+					<a href="shoping-cart.php">Features</a>
+				</li>
+
+				<li class="active-menu">
+					<a href="about.php">About Us</a>
 				</li>
 
 				<li>
-					<a href="blog.php">Blog</a>
+					<a href="contact.php">Contact Us</a>
 				</li>
 
 				<li>
-					<a href="about.php">About</a>
-				</li>
-
-				<li>
-					<a href="contact.php">Contact</a>
+					<a href="login.php">Login | Sign Up</a>
 				</li>
 			</ul>
 		</div>
@@ -249,7 +227,7 @@
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			
+
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -300,7 +278,7 @@
 						</div>
 					</li>
 				</ul>
-				
+
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
 						Total: $75.00
@@ -324,9 +302,9 @@
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
-			About
+			About Us
 		</h2>
-	</section>	
+	</section>
 
 
 	<!-- Content page -->
@@ -335,33 +313,26 @@
 			<div class="row p-b-148">
 				<div class="col-md-7 col-lg-8">
 					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
-						<h3 class="mtext-111 cl2 p-b-16">
-							Our Story
-						</h3>
 
-						<p class="stext-113 cl6 p-b-26">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.
-						</p>
-
-						<p class="stext-113 cl6 p-b-26">
-							Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. 
+						<!-- <p class="stext-113 cl6 p-b-26">
+							Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula.
 						</p>
 
 						<p class="stext-113 cl6 p-b-26">
 							Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-						</p>
+						</p> -->
 					</div>
 				</div>
 
-				<div class="col-11 col-md-5 col-lg-4 m-lr-auto">
+				<!-- <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
 					<div class="how-bor1 ">
 						<div class="hov-img0">
 							<img src="images/about-01.jpg" alt="IMG">
 						</div>
 					</div>
 				</div>
-			</div>
-			
+			</div> -->
+
 			<div class="row">
 				<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
 					<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
@@ -370,18 +341,22 @@
 						</h3>
 
 						<p class="stext-113 cl6 p-b-26">
-							Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida. Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.
-						</p>
+							Our mission is to be the leading marketing fashion industry in the world. </p>
+						<h3 class="mtext-111 cl2 p-b-16">
+							Our Vision
+						</h3>
+						<p class="stext-113 cl6 p-b-26">
+							Our vision is to bring service to the doorstep of our clients. </p>
+						<p class="stext-113 cl6 p-b-26">
+							<div class="bor16 p-l-29 p-b-9 m-t-22">
+								<p class="stext-114 cl6 p-r-40 p-b-11">
+									Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
+								</p>
 
-						<div class="bor16 p-l-29 p-b-9 m-t-22">
-							<p class="stext-114 cl6 p-r-40 p-b-11">
-								Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
-							</p>
-
-							<span class="stext-111 cl8">
-								- Steve Job’s 
-							</span>
-						</div>
+								<span class="stext-111 cl8">
+									- Steve Job’s
+								</span>
+							</div>
 					</div>
 				</div>
 
@@ -394,9 +369,9 @@
 				</div>
 			</div>
 		</div>
-	</section>	
-	
-		
+	</section>
+
+
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
@@ -448,7 +423,7 @@
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns 
+								Returns
 							</a>
 						</li>
 
@@ -472,7 +447,8 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						Any questions? Let us know in office at 2, Taskforce Road, PPL, Okokomaiko, Lagos. or call us
+						on 08156655541
 					</p>
 
 					<div class="p-t-27">
@@ -485,7 +461,7 @@
 						</a>
 
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
+							<i class="fa fa-whatsapp"></i>
 						</a>
 					</div>
 				</div>
@@ -512,35 +488,44 @@
 
 			<div class="p-t-40">
 				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
 					</a>
 				</div>
 
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>
+						document.write(new Date().getFullYear());
+					</script> All rights reserved | Developer
+					07082614612, 08068869769</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 				</p>
 			</div>
 		</div>
+	</footer>
+
+	</p>
+	</div>
+	</div>
 	</footer>
 
 
@@ -551,44 +536,45 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</span>
 	</div>
 
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
 	<script>
-		$(".js-select2").each(function(){
+		$(".js-select2").each(function() {
 			$(this).select2({
 				minimumResultsForSearch: 20,
 				dropdownParent: $(this).next('.dropDownSelect2')
 			});
 		})
 	</script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
+		$('.js-pscroll').each(function() {
+			$(this).css('position', 'relative');
+			$(this).css('overflow', 'hidden');
 			var ps = new PerfectScrollbar(this, {
 				wheelSpeed: 1,
 				scrollingThreshold: 1000,
 				wheelPropagation: false,
 			});
 
-			$(window).on('resize', function(){
+			$(window).on('resize', function() {
 				ps.update();
 			})
 		});
 	</script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-	
+
 </body>
+
 </html>

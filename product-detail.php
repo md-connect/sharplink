@@ -59,13 +59,13 @@
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							USD
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>
@@ -83,14 +83,10 @@
 						<ul class="main-menu">
 							<li>
 								<a href="index.php">Home</a>
-								<!-- <ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul> -->
+
 							</li>
 
-							<li>
+							<li class="active-menu">
 								<a href="product.php">Shop</a>
 							</li>
 
@@ -98,10 +94,10 @@
 								<a href="shoping-cart.php">Features</a>
 							</li>
 
-							<li>
-								<a href="blog.php">Blog</a>
+							<!-- 	<li>
+								<a href="blog.html">Blog</a>
 							</li>
-
+								 -->
 							<li>
 								<a href="about.php">About</a>
 							</li>
@@ -109,6 +105,7 @@
 							<li>
 								<a href="contact.php">Contact</a>
 							</li>
+
 						</ul>
 					</div>
 
@@ -118,15 +115,16 @@
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-							data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-							data-notify="0">
+						<!-- <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+						</a> -->
+						<li>
+							<a href="login.php">Login | Sign Up</a>
+						</li>
 					</div>
 				</nav>
 			</div>
@@ -145,15 +143,13 @@
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-					data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-					data-notify="0">
+				<!-- 	<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
 					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+				</a> -->
 			</div>
 
 			<!-- Button show menu -->
@@ -170,7 +166,7 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						Free shipping for standard order around Okokomaiko Axis
 					</div>
 				</li>
 
@@ -184,13 +180,13 @@
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
 							EN
 						</a>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							USD
-						</a>
+						</a> -->
 					</div>
 				</li>
 			</ul>
@@ -198,14 +194,7 @@
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-					<!-- <ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span> -->
+
 				</li>
 
 				<li>
@@ -216,16 +205,19 @@
 					<a href="shoping-cart.php" class="label1 rs1" data-label1="hot">Features</a>
 				</li>
 
-				<li>
-					<a href="blog.php">Blog</a>
-				</li>
+				<!-- <li>
+					<a href="blog.html">Blog</a>
+				</li> -->
 
 				<li>
 					<a href="about.php">About</a>
 				</li>
 
 				<li>
-					<a href="contact.php">Contact</a>
+					<a href="contact.php">Contact Us</a>
+				</li>
+				<li>
+					<a href="contact.php">Login | Sign Up</a>
 				</li>
 			</ul>
 		</div>
@@ -246,7 +238,6 @@
 			</div>
 		</div>
 	</header>
-
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -319,13 +310,11 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.php"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
-						<a href="shoping-cart.php"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out
 						</a>
 					</div>
@@ -370,8 +359,7 @@
 									<div class="wrap-pic-w pos-relative">
 										<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-											href="images/product-detail-01.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -381,8 +369,7 @@
 									<div class="wrap-pic-w pos-relative">
 										<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-											href="images/product-detail-02.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -392,8 +379,7 @@
 									<div class="wrap-pic-w pos-relative">
 										<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-											href="images/product-detail-03.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -465,16 +451,14 @@
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number"
-											name="num-product" value="1">
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
 
-									<button
-										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</button>
 								</div>
@@ -484,25 +468,20 @@
 						<!--  -->
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="#"
-									class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-									data-tooltip="Add to Wishlist">
+								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
 									<i class="zmdi zmdi-favorite"></i>
 								</a>
 							</div>
 
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-								data-tooltip="Facebook">
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
 								<i class="fa fa-facebook"></i>
 							</a>
 
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-								data-tooltip="Twitter">
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
 								<i class="fa fa-twitter"></i>
 							</a>
 
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-								data-tooltip="Google Plus">
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
 								<i class="fa fa-google-plus"></i>
 							</a>
 						</div>
@@ -667,25 +646,21 @@
 											<div class="row p-b-25">
 												<div class="col-12 p-b-5">
 													<label class="stext-102 cl3" for="review">Your review</label>
-													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
-														id="review" name="review"></textarea>
+													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
 												</div>
 
 												<div class="col-sm-6 p-b-5">
 													<label class="stext-102 cl3" for="name">Name</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name"
-														type="text" name="name">
+													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
 												</div>
 
 												<div class="col-sm-6 p-b-5">
 													<label class="stext-102 cl3" for="email">Email</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email"
-														type="text" name="email">
+													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
 												</div>
 											</div>
 
-											<button
-												class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
 												Submit
 											</button>
 										</form>
@@ -728,16 +703,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-01.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Esprit Ruffle Shirt
 									</a>
 
@@ -748,10 +721,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -764,16 +735,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-02.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Herschel supply
 									</a>
 
@@ -784,10 +753,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -800,16 +767,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-03.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Only Check Trouser
 									</a>
 
@@ -820,10 +785,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -836,16 +799,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-04.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Classic Trench Coat
 									</a>
 
@@ -856,10 +817,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -872,16 +831,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-05.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Front Pocket Jumper
 									</a>
 
@@ -892,10 +849,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -908,16 +863,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-06.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Vintage Inspired Classic
 									</a>
 
@@ -928,10 +881,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -944,16 +895,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-07.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Shirt in Stretch Cotton
 									</a>
 
@@ -964,10 +913,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -980,16 +927,14 @@
 							<div class="block2-pic hov-img0">
 								<img src="images/product-08.jpg" alt="IMG-PRODUCT">
 
-								<a href="#"
-									class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 									Quick View
 								</a>
 							</div>
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.php"
-										class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Pieces Metallic Printed
 									</a>
 
@@ -1000,10 +945,8 @@
 
 								<div class="block2-txt-child2 flex-r p-t-3">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="images/icons/icon-heart-02.png" alt="ICON">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 									</a>
 								</div>
 							</div>
@@ -1089,8 +1032,8 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-						on (+1) 96 716 6879
+						Any questions? Let us know in office at 2, Taskforce Road, PPL, Okokomaiko, Lagos. or call us
+						on 08156655541
 					</p>
 
 					<div class="p-t-27">
@@ -1103,7 +1046,7 @@
 						</a>
 
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
+							<i class="fa fa-whatsapp"></i>
 						</a>
 					</div>
 				</div>
@@ -1115,8 +1058,7 @@
 
 					<form>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
-								placeholder="email@example.com">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
 							<div class="focus-input1 trans-04"></div>
 						</div>
 
@@ -1131,23 +1073,23 @@
 
 			<div class="p-t-40">
 				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
 					</a>
 				</div>
@@ -1155,9 +1097,10 @@
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
-					<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
-					made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-						target="_blank">Colorlib</a>
+					<script>
+						document.write(new Date().getFullYear());
+					</script> All rights reserved | Developer
+					07082614612, 08068869769</a>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 				</p>
@@ -1195,8 +1138,7 @@
 										<div class="wrap-pic-w pos-relative">
 											<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-												href="images/product-detail-01.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
@@ -1206,8 +1148,7 @@
 										<div class="wrap-pic-w pos-relative">
 											<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-												href="images/product-detail-02.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
@@ -1217,8 +1158,7 @@
 										<div class="wrap-pic-w pos-relative">
 											<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-												href="images/product-detail-03.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
@@ -1290,16 +1230,14 @@
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number"
-												name="num-product" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
 
-										<button
-											class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 											Add to cart
 										</button>
 									</div>
@@ -1309,25 +1247,20 @@
 							<!--  -->
 							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#"
-										class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-										data-tooltip="Add to Wishlist">
+									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
 										<i class="zmdi zmdi-favorite"></i>
 									</a>
 								</div>
 
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-									data-tooltip="Facebook">
+								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
 									<i class="fa fa-facebook"></i>
 								</a>
 
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-									data-tooltip="Twitter">
+								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
 									<i class="fa fa-twitter"></i>
 								</a>
 
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-									data-tooltip="Google Plus">
+								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
 									<i class="fa fa-google-plus"></i>
 								</a>
 							</div>
@@ -1348,7 +1281,7 @@
 	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
 	<script>
-		$(".js-select2").each(function () {
+		$(".js-select2").each(function() {
 			$(this).select2({
 				minimumResultsForSearch: 20,
 				dropdownParent: $(this).next('.dropDownSelect2')
@@ -1369,7 +1302,7 @@
 	<!--===============================================================================================-->
 	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 	<script>
-		$('.gallery-lb').each(function () { // the containers for all your galleries
+		$('.gallery-lb').each(function() { // the containers for all your galleries
 			$(this).magnificPopup({
 				delegate: 'a', // the selector for gallery item
 				type: 'image',
@@ -1385,13 +1318,13 @@
 	<!--===============================================================================================-->
 	<script src="vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
-		$('.js-addwish-b2, .js-addwish-detail').on('click', function (e) {
+		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e) {
 			e.preventDefault();
 		});
 
-		$('.js-addwish-b2').each(function () {
+		$('.js-addwish-b2').each(function() {
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function () {
+			$(this).on('click', function() {
 				swal(nameProduct, "is added to wishlist !", "success");
 
 				$(this).addClass('js-addedwish-b2');
@@ -1399,10 +1332,10 @@
 			});
 		});
 
-		$('.js-addwish-detail').each(function () {
+		$('.js-addwish-detail').each(function() {
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
-			$(this).on('click', function () {
+			$(this).on('click', function() {
 				swal(nameProduct, "is added to wishlist !", "success");
 
 				$(this).addClass('js-addedwish-detail');
@@ -1412,18 +1345,17 @@
 
 		/*---------------------------------------------*/
 
-		$('.js-addcart-detail').each(function () {
+		$('.js-addcart-detail').each(function() {
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function () {
+			$(this).on('click', function() {
 				swal(nameProduct, "is added to cart !", "success");
 			});
 		});
-
 	</script>
 	<!--===============================================================================================-->
 	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
-		$('.js-pscroll').each(function () {
+		$('.js-pscroll').each(function() {
 			$(this).css('position', 'relative');
 			$(this).css('overflow', 'hidden');
 			var ps = new PerfectScrollbar(this, {
@@ -1432,7 +1364,7 @@
 				wheelPropagation: false,
 			});
 
-			$(window).on('resize', function () {
+			$(window).on('resize', function() {
 				ps.update();
 			})
 		});

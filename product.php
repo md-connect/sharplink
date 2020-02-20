@@ -6,7 +6,7 @@ include("includes/dbconfig.php");
 <html lang="en">
 
 <head>
-	<title>Product</title>
+	<title>Products</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -51,7 +51,7 @@ include("includes/dbconfig.php");
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order around Okokomaiko Axis
+						Free shipping for orders around Okokomaiko Axis
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
@@ -62,6 +62,7 @@ include("includes/dbconfig.php");
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
+
 						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
 						</a>
@@ -72,7 +73,6 @@ include("includes/dbconfig.php");
 					</div>
 				</div>
 			</div>
-
 
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
@@ -87,11 +87,7 @@ include("includes/dbconfig.php");
 						<ul class="main-menu">
 							<li>
 								<a href="index.php">Home</a>
-								<!-- <ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul> -->
+
 							</li>
 
 							<li class="active-menu">
@@ -102,10 +98,10 @@ include("includes/dbconfig.php");
 								<a href="shoping-cart.php">Features</a>
 							</li>
 
-							<!-- <li>
-								<a href="blog.php">Blog</a>
-							</li> -->
-
+							<!-- 	<li>
+								<a href="blog.html">Blog</a>
+							</li>
+								 -->
 							<li>
 								<a href="about.php">About</a>
 							</li>
@@ -113,6 +109,7 @@ include("includes/dbconfig.php");
 							<li>
 								<a href="contact.php">Contact</a>
 							</li>
+
 						</ul>
 					</div>
 
@@ -126,9 +123,12 @@ include("includes/dbconfig.php");
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+						<!-- <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+						</a> -->
+						<li>
+							<a href="login.php">Login | Sign Up</a>
+						</li>
 					</div>
 				</nav>
 			</div>
@@ -151,9 +151,9 @@ include("includes/dbconfig.php");
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+				<!-- 	<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
 					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+				</a> -->
 			</div>
 
 			<!-- Button show menu -->
@@ -172,15 +172,25 @@ include("includes/dbconfig.php");
 					<div class="left-top-bar">
 						Free shipping for standard order around Okokomaiko Axis
 					</div>
+				</li>
 
+				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							My Account
 						</a>
+
+						<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
+							EN
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							USD
+						</a> -->
 					</div>
 				</li>
 			</ul>
@@ -188,14 +198,7 @@ include("includes/dbconfig.php");
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-					<!-- <ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span> -->
+
 				</li>
 
 				<li>
@@ -207,7 +210,7 @@ include("includes/dbconfig.php");
 				</li>
 
 				<!-- <li>
-					<a href="blog.php">Blog</a>
+					<a href="blog.html">Blog</a>
 				</li> -->
 
 				<li>
@@ -215,7 +218,10 @@ include("includes/dbconfig.php");
 				</li>
 
 				<li>
-					<a href="contact.php">Contact</a>
+					<a href="contact.php">Contact Us</a>
+				</li>
+				<li>
+					<a href="contact.php">Login | Sign Up</a>
 				</li>
 			</ul>
 		</div>
@@ -345,14 +351,14 @@ include("includes/dbconfig.php");
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
 						Men
 					</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".senator">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Senator">
 						Senator Materials
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".native">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Native">
 						Natives
 					</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".suit">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Suit">
 						Suits
 					</button>
 
@@ -574,53 +580,9 @@ include("includes/dbconfig.php");
 				</div>
 			</div>
 			<!-- Product grids -->
+
 			<div class="row isotope-grid">
-				<?php
-				$sql = mysqli_query($conn, "SELECT * FROM products");
-				if (mysqli_num_rows($sql) > 0) {
-					while ($row = mysqli_fetch_assoc($sql)) {
-
-				?>
-						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row['pd_category'] . ' ' . $row['pd_type']; ?>">
-							<!-- Block2 -->
-							<div class="block2">
-								<div class="block2-pic hov-img0">
-									<img src="images/<?php echo $row['picture']; ?>" alt="IMG-PRODUCT">
-
-									<a href="#?id=<?php echo $row['pd_id']; ?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-										Quick View
-									</a>
-								</div>
-
-								<div class="block2-txt flex-w flex-t p-t-14">
-									<div class="block2-txt-child1 flex-col-l ">
-										<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-											<?php echo $row['pd_name']; ?>
-										</a>
-
-										<span class="stext-105 cl3">
-											N<?php echo $row['price']; ?>
-										</span>
-									</div>
-
-									<div class="block2-txt-child2 flex-r p-t-3">
-										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-											<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-				<?php
-						//echo $pd_name;
-					}
-				} else {
-					echo "<h4 style='text-align:center;'>No product available in the store, please check back later.</h4>";
-				}
-				?>
-
-
+				<div id="allproducts"></div>
 			</div>
 
 			<!-- Load more -->
@@ -707,8 +669,8 @@ include("includes/dbconfig.php");
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-						on (+1) 96 716 6879
+						Any questions? Let us know in office at 2, Taskforce Road, PPL, Okokomaiko, Lagos. or call us
+						on 08156655541
 					</p>
 
 					<div class="p-t-27">
@@ -721,7 +683,7 @@ include("includes/dbconfig.php");
 						</a>
 
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
+							<i class="fa fa-whatsapp"></i>
 						</a>
 					</div>
 				</div>
@@ -748,23 +710,23 @@ include("includes/dbconfig.php");
 
 			<div class="p-t-40">
 				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
 					</a>
 				</div>
@@ -774,8 +736,8 @@ include("includes/dbconfig.php");
 					Copyright &copy;
 					<script>
 						document.write(new Date().getFullYear());
-					</script> All rights reserved | This template is
-					made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+					</script> All rights reserved | Developer
+					07082614612, 08068869769</a>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 				</p>
@@ -791,7 +753,9 @@ include("includes/dbconfig.php");
 		</span>
 	</div>
 
-	<!-- Modal1 -->
+
+	<!-- ============================================================== -->
+	<!-- modal  -->
 	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
 		<div class="overlay-modal1 js-hide-modal1"></div>
 
@@ -802,6 +766,7 @@ include("includes/dbconfig.php");
 				</button>
 
 				<div class="row">
+					<div id="productdetails"></div>
 					<div class="col-md-6 col-lg-7 p-b-30">
 						<div class="p-l-25 p-r-30 p-lr-0-lg">
 							<div class="wrap-slick3 flex-sb flex-w">
@@ -858,7 +823,7 @@ include("includes/dbconfig.php");
 								ornare feugiat.
 							</p>
 
-							<!--  -->
+
 							<div class="p-t-33">
 								<div class="flex-w flex-r-m p-b-10">
 									<div class="size-203 flex-c-m respon6">
@@ -919,32 +884,15 @@ include("includes/dbconfig.php");
 								</div>
 							</div>
 
-							<!--  -->
-							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
-								</div>
 
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-									<i class="fa fa-facebook"></i>
-								</a>
 
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-									<i class="fa fa-twitter"></i>
-								</a>
-
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-									<i class="fa fa-google-plus"></i>
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--modal end -->
 
 	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -955,6 +903,17 @@ include("includes/dbconfig.php");
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#viewdetails').click(function(e) {
+				e.preventDefault();
+
+				alert(1);
+			})
+		})
+	</script>
+
 	<script>
 		$(".js-select2").each(function() {
 			$(this).select2({
@@ -1046,6 +1005,50 @@ include("includes/dbconfig.php");
 	</script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script>
+		$(document).ready(function() {
+			function products() {
+				$.ajax({
+					url: 'includes/products.php',
+					method: 'POST',
+					data: {
+						products: 1
+					},
+					success: function(data) {
+						$('#allproducts').html(data);
+					}
+				})
+			}
+			products();
+
+			$('body').delegate('.js-show-modal1', 'click', function(e) {
+				e.preventDefault();
+				$('.js-modal1').addClass('show-modal1');
+			})
+
+			$('body').delegate('.js-show-modal1', 'click', function(e) {
+				e.preventDefault();
+				var pid = $(this).attr('pid');
+				alert(pid);
+				$.ajax({
+					url: 'includes/products.php',
+					method: 'POST',
+					data: {
+						productdetails: 1,
+						pid: pid
+					},
+					success: function(data) {
+						$('#allproducts').html(data);
+					}
+				})
+
+			})
+
+			/* $('.js-hide-modal1').on('click', function() {
+				$('.js-modal1').removeClass('show-modal1')
+			}) */
+		});
+	</script>
 
 </body>
 

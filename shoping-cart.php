@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Shoping Cart</title>
+	<title>Shopping Cart</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -53,13 +53,13 @@
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
 						</a>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							USD
-						</a>
+						</a> -->
 					</div>
 				</div>
 			</div>
@@ -77,32 +77,29 @@
 						<ul class="main-menu">
 							<li>
 								<a href="index.php">Home</a>
-								<!-- <ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul> -->
+
 							</li>
 
-							<li>
+							<li >
 								<a href="product.php">Shop</a>
 							</li>
 
-							<li class="label1" data-label1="hot">
+							<li class="label1 active-menu" data-label1="hot">
 								<a href="shoping-cart.php">Features</a>
 							</li>
 
-							<li>
-								<a href="blog.php">Blog</a>
+							<!-- 	<li>
+								<a href="blog.html">Blog</a>
 							</li>
-
+								 -->
 							<li>
 								<a href="about.php">About</a>
 							</li>
 
 							<li>
-								<a href="contact.php">Contact</a>
+								<a href="contact.php">Contact Us</a>
 							</li>
+
 						</ul>
 					</div>
 
@@ -112,15 +109,16 @@
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-							data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-							data-notify="0">
+						<!-- <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+						</a> -->
+						<li>
+							<a href="login.php">Login | Sign Up</a>
+						</li>
 					</div>
 				</nav>
 			</div>
@@ -139,15 +137,13 @@
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-					data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-					data-notify="0">
+				<!-- 	<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
 					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+				</a> -->
 			</div>
 
 			<!-- Button show menu -->
@@ -164,7 +160,7 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						Free shipping for standard order around Okokomaiko Axis
 					</div>
 				</li>
 
@@ -178,13 +174,13 @@
 							My Account
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
 							EN
 						</a>
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							USD
-						</a>
+						</a> -->
 					</div>
 				</li>
 			</ul>
@@ -192,14 +188,7 @@
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-					<!-- <ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span> -->
+
 				</li>
 
 				<li>
@@ -210,16 +199,19 @@
 					<a href="shoping-cart.php" class="label1 rs1" data-label1="hot">Features</a>
 				</li>
 
-				<li>
-					<a href="blog.php">Blog</a>
-				</li>
+				<!-- <li>
+					<a href="blog.html">Blog</a>
+				</li> -->
 
 				<li>
 					<a href="about.php">About</a>
 				</li>
 
 				<li>
-					<a href="contact.php">Contact</a>
+					<a href="contact.php">Contact Us</a>
+				</li>
+				<li>
+					<a href="contact.php">Login | Sign Up</a>
 				</li>
 			</ul>
 		</div>
@@ -313,13 +305,11 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.php"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
-						<a href="shoping-cart.php"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out
 						</a>
 					</div>
@@ -374,8 +364,7 @@
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number"
-												name="num-product1" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
@@ -399,8 +388,7 @@
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number"
-												name="num-product2" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
@@ -414,17 +402,14 @@
 
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
-									name="coupon" placeholder="Coupon Code">
+								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
 
-								<div
-									class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+								<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
 									Apply coupon
 								</div>
 							</div>
 
-							<div
-								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								Update Cart
 							</div>
 						</div>
@@ -479,18 +464,15 @@
 									</div>
 
 									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state"
-											placeholder="State /  country">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
 									</div>
 
 									<div class="bor8 bg0 m-b-22">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode"
-											placeholder="Postcode / Zip">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
 									</div>
 
 									<div class="flex-w">
-										<div
-											class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
+										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
 											Update Totals
 										</div>
 									</div>
@@ -599,8 +581,8 @@
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us
-						on (+1) 96 716 6879
+						Any questions? Let us know in office at 2, Taskforce Road, PPL, Okokomaiko, Lagos. or call us
+						on 08156655541
 					</p>
 
 					<div class="p-t-27">
@@ -613,7 +595,7 @@
 						</a>
 
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
+							<i class="fa fa-whatsapp"></i>
 						</a>
 					</div>
 				</div>
@@ -625,8 +607,7 @@
 
 					<form>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
-								placeholder="email@example.com">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
 							<div class="focus-input1 trans-04"></div>
 						</div>
 
@@ -641,23 +622,23 @@
 
 			<div class="p-t-40">
 				<div class="flex-c-m flex-w p-b-18">
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
 					</a>
 
-					<a href="#" class="m-all-1">
+					<a class="m-all-1">
 						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
 					</a>
 				</div>
@@ -665,9 +646,10 @@
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
-					<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
-					made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-						target="_blank">Colorlib</a>
+					<script>
+						document.write(new Date().getFullYear());
+					</script> All rights reserved | Developer
+					07082614612, 08068869769</a>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 				</p>
@@ -693,7 +675,7 @@
 	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
 	<script>
-		$(".js-select2").each(function () {
+		$(".js-select2").each(function() {
 			$(this).select2({
 				minimumResultsForSearch: 20,
 				dropdownParent: $(this).next('.dropDownSelect2')
@@ -705,7 +687,7 @@
 	<!--===============================================================================================-->
 	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
-		$('.js-pscroll').each(function () {
+		$('.js-pscroll').each(function() {
 			$(this).css('position', 'relative');
 			$(this).css('overflow', 'hidden');
 			var ps = new PerfectScrollbar(this, {
@@ -714,7 +696,7 @@
 				wheelPropagation: false,
 			});
 
-			$(window).on('resize', function () {
+			$(window).on('resize', function() {
 				ps.update();
 			})
 		});
