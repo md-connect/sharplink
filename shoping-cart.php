@@ -80,7 +80,7 @@
 
 							</li>
 
-							<li >
+							<li>
 								<a href="product.php">Shop</a>
 							</li>
 
@@ -495,14 +495,45 @@
 							</div>
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
+
+						<script src="https://js.paystack.co/v1/inline.js"></script>
+						<!-- <button type="button" onclick="payWithPaystack()"> Pay </button> -->
+
+
+						<button name="pay" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" type="button" onclick="payWithPaystack()">
+							Proceed to Payment
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+	<!-- place below the html form -->
+	<script>
+		function payWithPaystack() {
+			var handler = PaystackPop.setup({
+				key: 'pk_test_0739a8b130f2807de84fc543778c2c816c7ab24d',
+				email: 'mondayoke93@gmail.com',
+				amount: 10000,
+				ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+				metadata: {
+					custom_fields: [{
+						display_name: "Mobile Number",
+						variable_name: "mobile_number",
+						value: "+2348068869769"
+					}]
+				},
+				callback: function(response) {
+					alert('success. transaction ref is ' + response.reference);
+				},
+				onClose: function() {
+					alert('window closed');
+				}
+			});
+			handler.openIframe();
+		}
+	</script>
+
 
 
 

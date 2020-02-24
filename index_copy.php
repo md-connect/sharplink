@@ -731,15 +731,15 @@ include("includes/dbconfig.php");
 				if (mysqli_num_rows($sql) > 0) {
 					$j = 0;
 					while ($row = mysqli_fetch_assoc($sql)) {
-						
-						?>
+
+				?>
 						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row['pd_category'] . ' ' . $row['pd_type']; ?>">
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
 									<img src="images/<?php echo $row['picture']; ?>" alt="IMG-PRODUCT">
 
-									<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 jsmodal_btn" data-mod=<?php echo $j; ?> >
+									<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" data-mod=<?php echo $j; ?>>
 										Quick View
 									</a>
 								</div>
@@ -766,7 +766,7 @@ include("includes/dbconfig.php");
 						</div>
 
 
-						
+
 
 				<?php
 						//echo $pd_name;
@@ -798,8 +798,8 @@ include("includes/dbconfig.php");
 										<div class="wrap-slick3-dots"></div>
 										<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-										<div id="slick3g" class="slick3 gallery-lb">
-											<div class="item-slick3" id='si1' data-thumb="">
+										<div id="sidesImg" class="slick3 gallery-lb">
+											<div id='si_img_1' class="item-slick3" data-thumb="">
 												<div class="wrap-pic-w pos-relative">
 													<img id='si1_1' src="" alt="IMG-PRODUCT">
 
@@ -809,7 +809,7 @@ include("includes/dbconfig.php");
 												</div>
 											</div>
 
-											<div id='si2' class="item-slick3" data-thumb="">
+											<div id='si_img_2' class="item-slick3" data-thumb="">
 												<div class="wrap-pic-w pos-relative">
 													<img id='si2_1' src="" alt="IMG-PRODUCT">
 
@@ -819,7 +819,7 @@ include("includes/dbconfig.php");
 												</div>
 											</div>
 
-											<div id='si3' class="item-slick3" data-thumb="">
+											<div id='si_img_3' class="item-slick3" data-thumb="">
 												<div class="wrap-pic-w pos-relative">
 													<img id='si3_1' src="" alt="IMG-PRODUCT">
 
@@ -835,17 +835,11 @@ include("includes/dbconfig.php");
 
 							<div id='modal_info_panel' class="col-md-6 col-lg-5 p-b-30">
 								<div class="p-r-50 p-t-5 p-lr-0-lg">
-									<h4 id="title" class="mtext-105 cl2 js-name-detail p-b-14">
-										<?php echo $row['pd_name']; ?>
-									</h4>
+									<h4 id="m_title" class="mtext-105 cl2 js-name-detail p-b-14"></h4>
 
-									<span id="price" class="mtext-106 cl2">
-										N<?php echo $row['price']; ?>
-									</span>
+									<span id="m_price" class="mtext-106 cl2"></span>
 
-									<p id="desc" class="stext-102 cl3 p-t-23">
-										<?php echo $row['description']; ?>
-									</p>
+									<p id="m_desc" class="stext-102 cl3 p-t-23"></p>
 
 									<!--  -->
 									<div class="p-t-33">
@@ -1113,8 +1107,54 @@ include("includes/dbconfig.php");
 	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
 	<script>
-	   let cont = <?php echo json_encode($array_list); ?>;
-	   console.log(cont);
+		let cont = <?php echo json_encode($array_list); ?>;
+		console.log(cont);
+		$('.js-show-modal1').click(function(e) {
+			e.preventDefault();
+			//get index
+			var ind = $(this).attr('data-mod');
+			//populate modal with contents from cont array
+			//add thumbnail for sidebar
+			$('.slick3-dots li:nth-child(1) img').attr('src', './images/' + cont[ind]['picture']);
+			//add side images 1
+			$('#si1_1').attr('src', './images/' + cont[ind]['picture']);
+			$('#si1_2').attr('href', './images/' + cont[ind]['picture']);
+
+			//add side image 2
+			if (cont[ind]['picture2'] == '') {
+				//add default image 1
+				$('#si2_1').attr('src', './images/' + cont[ind]['picture']);
+				$('#si2_2').attr('href', './images/' + cont[ind]['picture']);
+				//add thumbnail for sidebar
+				$('.slick3-dots li:nth-child(2) img').attr('src', './images/' + cont[ind]['picture']);
+			} else {
+				//add its image
+				$('#si2_1').attr('src', './images/' + cont[ind]['picture2']);
+				$('#si2_2').attr('href', './images/' + cont[ind]['picture2']);
+				//add thumbnail for sidebar
+				$('.slick3-dots li:nth-child(2) img').attr('src', './images/' + cont[ind]['picture2']);
+			}
+			//add side image 2
+			if (cont[ind]['picture3'] == '') {
+				//add default image 1
+				$('#si3_1').attr('src', './images/' + cont[ind]['picture']);
+				$('#si3_2').attr('href', './images/' + cont[ind]['picture']);
+				//add thumbnail for sidebar
+				$('.slick3-dots li:nth-child(3) img').attr('src', './images/' + cont[ind]['picture']);
+			} else {
+				//add its image
+				$('#si3_1').attr('src', './images/' + cont[ind]['picture3']);
+				$('#si3_2').attr('href', './images/' + cont[ind]['picture3']);
+				//add thumbnail for sidebar
+				$('.slick3-dots li:nth-child(3) img').attr('src', './images/' + cont[ind]['picture3']);
+			}
+
+			//add informations about the item
+			$('#m_title').html(cont[ind]['pd_name']);
+			$('#m_price').html('N' + cont[ind]['price']);
+			$('#m_desc').html(cont[ind]['description']);
+
+		});
 	</script>
 	<script>
 		$(".js-select2").each(function() {
@@ -1208,43 +1248,6 @@ include("includes/dbconfig.php");
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
-
-	<script>
-    $('.jsmodal_btn').on('click',function(e){
-        e.preventDefault();
-		let i = $(this).attr('data-mod');
-		console.log('show_modal');
-		// show_modal(i);
-    });
-
-	function show_modal(i)
-    {
-        populate_modal(i);
-		$('#modal_box').addClass('show-modal1');
-    }
-
-    function hide_modal(i = 1)
-    {
-    $('.js-hide-modal' + i).on('click',function(){
-        $('.js-modal' + i).removeClass('show-modal' + i);
-    });
-
-    }
-
-    function populate_modal(i)
-    {
-        //
-		let curr = cont[i0];
-		//load all images in modal left sidebar
-        $('#modal_box #slick3g #si1', '#modal_box #slick3g #si2', '#modal_box #slick3g #si3').attr('data-thumb', 'images/' + curr['picture'];);
-        $('#modal_box #slick3g #si1 #si1_1', '#modal_box #slick3g #si2 #si2_1', '#modal_box #slick3g #si3 #si3_1').attr('src', 'images/' + curr['picture'];);
-        $('#modal_box #slick3g #si1 #si1_2', '#modal_box #slick3g #si2 #si2_2', '#modal_box #slick3g #si3 #si3_2').attr('href', 'images/' + curr['picture'];);
-
-		$('#modal_box #modal_info_panel #title').val(curr['title']);
-		$('#modal_box #modal_info_panel #price').val(curr['price']);
-		$('#modal_box #modal_info_panel #desc').val(curr['description']);
-    }
-	</script>
 
 </body>
 
