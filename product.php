@@ -1,7 +1,66 @@
-<?php
+<?php session_start();
 include("includes/dbconfig.php");
 
+//code for Cart
+if (!empty($_GET["action"])) {
+	/* $exist = false;
+	if (isset($_SESSION["cart_item"])){
+		foreach ($_SESSION["cart_item"] as $k => $v) {
+			if ($_GET["pid"] == $v['code']) {
+				$exist = true;
+			}
+		}
+	} */
+	switch ($_GET["action"]) {
+			//code for adding product in cart
+		case "add":
+			//if($exist == false){
+			if (!empty($_POST["quantity"])) {
+				$pid = $_GET["pid"];
+				$result = mysqli_query($conn, "SELECT * FROM products WHERE pd_id='$pid'");
+				while ($productByCode = mysqli_fetch_array($result)) {
+					$itemArray = array($productByCode["pd_id"] => array('name' => $productByCode["pd_name"], 'code' => $productByCode["pd_id"], 'quantity' => $_POST["quantity"], 'price' => $productByCode["price"], 'image' => $productByCode["picture"]));
+					if (!empty($_SESSION["cart_item"])) {
+						if (in_array($productByCode["pd_id"], array_keys($_SESSION["cart_item"]))) {
+							foreach ($_SESSION["cart_item"] as $k => $v) {
+								if ($productByCode["pd_id"] == $k) {
+									if (empty($_SESSION["cart_item"][$k]["quantity"])) {
+										$_SESSION["cart_item"][$k]["quantity"] = 0;
+									}
+									$_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
+								}
+							}
+						} else {
+							$_SESSION["cart_item"] = array_merge($_SESSION["cart_item"], $itemArray);
+						}
+					} else {
+						$_SESSION["cart_item"] = $itemArray;
+					}
+				}
+			}
+			//}
+			break;
+
+			// code for removing product from cart
+		case "remove":
+			if (!empty($_SESSION["cart_item"])) {
+				foreach ($_SESSION["cart_item"] as $k => $v) {
+					if ($_GET["code"] == $k)
+						unset($_SESSION["cart_item"][$k]);
+					if (empty($_SESSION["cart_item"]))
+						unset($_SESSION["cart_item"]);
+				}
+			}
+			break;
+			// code for if cart is empty
+		case "empty":
+			unset($_SESSION["cart_item"]);
+			break;
+	}
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,7 +178,12 @@ include("includes/dbconfig.php");
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php
+																																	if (isset($_SESSION['cart_item'])) {
+																																		echo count($_SESSION['cart_item']);
+																																	} else {
+																																		echo "0";
+																																	} ?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -147,7 +211,12 @@ include("includes/dbconfig.php");
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php
+																															if (isset($_SESSION['cart_item'])) {
+																																echo count($_SESSION['cart_item']);
+																															} else {
+																																echo "0";
+																															} ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -243,91 +312,104 @@ include("includes/dbconfig.php");
 		</div>
 	</header>
 
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
+	<?php
+	if (isset($_SESSION["cart_item"])) {
+		$total_quantity = 0;
+		$total_price = 0;
+	?>
+		<!-- Cart -->
+		<div class="wrap-header-cart js-panel-cart">
+			<div class="s-full js-hide-cart"></div>
 
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
+			<div class="header-cart flex-col-l p-l-65 p-r-25">
+				<div class="header-cart-title flex-w flex-sb-m p-b-8">
+					<span class="mtext-103 cl2">
+						Your Cart
+					</span>
 
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
-				</ul>
-
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
+					<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+						<i class="zmdi zmdi-close"></i>
 					</div>
+				</div>
+				<div class="header-cart-content flex-w js-pscroll">
+					<ul class="header-cart-wrapitem w-full">
+						<?php
+						foreach ($_SESSION["cart_item"] as $item) {
+							$item_price = $item["quantity"] * $item["price"];
+						?>
+							<li class="header-cart-item flex-w flex-t m-b-12">
+								<div class="header-cart-item-img">
+									<img src="./images/<?php echo $item["image"]; ?>" alt="IMG">
+								</div>
 
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
+								<div class="header-cart-item-txt p-t-8">
+									<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+										<?php echo $item["name"]; ?>
+									</a>
 
-						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
+									<span class="header-cart-item-info">
+										<?php echo $item["quantity"] . "x N " . $item["price"]; ?>
+									</span>
+								</div>
+							</li>
+
+						<?php
+							$total_quantity += $item["quantity"];
+							$total_price += ($item["price"] * $item["quantity"]);
+						}
+						?>
+					</ul>
+
+					<div class="w-full">
+						<div class="header-cart-total w-full p-tb-40">
+							Total: <?php echo "N " . number_format($total_price, 2); ?>
+						</div>
+
+						<div class="header-cart-buttons flex-w w-full">
+							<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+								View Cart
+							</a>
+
+							<a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+								Check Out
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	<?php
+	} else {
+	?>
+		<div class="wrap-header-cart js-panel-cart">
+			<div class="s-full js-hide-cart"></div>
+			<div class="header-cart flex-col-l p-l-65 p-r-25">
+				<div class="header-cart-title flex-w flex-sb-m p-b-8">
+					<span class="mtext-103 cl2">
+						Your Cart
+					</span>
 
+					<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+						<i class="zmdi zmdi-close"></i>
+					</div>
+				</div>
+
+				<div class="no-records">Your Cart is Empty</div>
+				<div class="header-cart-buttons flex-w w-full">
+					<a href="product.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						Shop Now
+					</a>
+
+					<!-- <a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a> -->
+				</div>
+			</div>
+		</div>
+
+	<?php
+	}
+	?>
 
 	<!-- Product -->
 	<section class="bg0 p-t-23 p-b-140">
@@ -640,9 +722,6 @@ include("includes/dbconfig.php");
 							</div>
 						</div>
 
-
-
-
 					<?php
 						//echo $pd_name;
 						$array_list[] = $row;
@@ -712,7 +791,6 @@ include("includes/dbconfig.php");
 									</div>
 								</div>
 							</div>
-
 							<div id='modal_info_panel' class="col-md-6 col-lg-5 p-b-30">
 								<div class="p-r-50 p-t-5 p-lr-0-lg">
 									<h4 id="m_title" class="mtext-105 cl2 js-name-detail p-b-14"></h4>
@@ -722,8 +800,10 @@ include("includes/dbconfig.php");
 									<p id="m_desc" class="stext-102 cl3 p-t-23"></p>
 
 									<!--  -->
-									<div class="p-t-33">
-										<div class="flex-w flex-r-m p-b-10">
+									<form method="post" id="cart_form" action="">
+
+										<div class="p-t-33">
+											<!-- <div class="flex-w flex-r-m p-b-10">
 											<div class="size-203 flex-c-m respon6">
 												Size
 											</div>
@@ -740,9 +820,9 @@ include("includes/dbconfig.php");
 													<div class="dropDownSelect2"></div>
 												</div>
 											</div>
-										</div>
+										</div> -->
 
-										<div class="flex-w flex-r-m p-b-10">
+											<!-- <div class="flex-w flex-r-m p-b-10">
 											<div class="size-203 flex-c-m respon6">
 												Color
 											</div>
@@ -759,87 +839,89 @@ include("includes/dbconfig.php");
 													<div class="dropDownSelect2"></div>
 												</div>
 											</div>
-										</div>
+										</div> -->
 
-										<div class="flex-w flex-r-m p-b-10">
-											<div class="size-204 flex-w flex-m respon6-next">
-												<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-													<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-														<i class="fs-16 zmdi zmdi-minus"></i>
+											<div class="flex-w flex-r-m p-b-10">
+												<div class="size-204 flex-w flex-m respon6-next">
+													<div class="size-203 flex-c-m respon6">
+														Quantity:
+													</div>
+													<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+														<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+															<i class="fs-16 zmdi zmdi-minus"></i>
+														</div>
+														<input class="mtext-104 cl3 txt-center num-product" type="number" name="quantity" value="1">
+
+														<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+															<i class="fs-16 zmdi zmdi-plus"></i>
+														</div>
 													</div>
 
-													<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-													<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-														<i class="fs-16 zmdi zmdi-plus"></i>
-													</div>
-												</div>
-
-												<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-													Add to cart
-												</button>
-											</div>
-										</div>
-									</div>
-
-									<!--  -->
-									<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-										<div class="flex-m bor9 p-r-10 m-r-11">
-											<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-												<i class="zmdi zmdi-favorite"></i>
-											</a>
-										</div>
-
-										<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-											<i class="fa fa-facebook"></i>
-										</a>
-
-										<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-											<i class="fa fa-twitter"></i>
-										</a>
-
-										<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-											<i class="fa fa-google-plus"></i>
-										</a>
-									</div>
+													<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+														Add to cart
+													</button>
+									</form>
 								</div>
 							</div>
+						</div>
+						<!--  -->
+						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+							<div class="flex-m bor9 p-r-10 m-r-11">
+								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+									<i class="zmdi zmdi-favorite"></i>
+								</a>
+							</div>
+
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+								<i class="fa fa-facebook"></i>
+							</a>
+
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+								<i class="fa fa-twitter"></i>
+							</a>
+
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+								<i class="fa fa-google-plus"></i>
+							</a>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+		</div>
+		</div>
 
-			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
-				<!-- introduction of pagination -->
-				<ul class="pagination">
-					<li><a href="?pageno=1" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">First</a></li>
-					<li class="<?php if ($pageno <= 1) {
-									echo 'disabled';
-								} ?>">
-						<a href="<?php if ($pageno <= 1) {
-										echo '#';
-									} else {
-										echo "?pageno=" . ($pageno - 1);
-									} ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">Prev</a>
-					</li>
-					<li class="<?php if ($pageno >= $total_pages) {
-									echo 'disabled';
-								} ?>">
-						<a href="<?php if ($pageno >= $total_pages) {
-										echo '#';
-									} else {
-										echo "?pageno=" . ($pageno + 1);
-									} ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">Next</a>
-					</li>
-					<li><a href="?pageno=<?php echo $total_pages; ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">Last</a></li>
-				</ul>
+		<!-- Load more -->
+		<div class="flex-c-m flex-w w-full p-t-45">
+			<!-- introduction of pagination -->
+			<ul class="pagination">
+				<li><a href="?pageno=1" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">First</a></li>
+				<li class="<?php if ($pageno <= 1) {
+								echo 'disabled';
+							} ?>">
+					<a href="<?php if ($pageno <= 1) {
+									echo '#';
+								} else {
+									echo "?pageno=" . ($pageno - 1);
+								} ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">Prev</a>
+				</li>
+				<li class="<?php if ($pageno >= $total_pages) {
+								echo 'disabled';
+							} ?>">
+					<a href="<?php if ($pageno >= $total_pages) {
+									echo '#';
+								} else {
+									echo "?pageno=" . ($pageno + 1);
+								} ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">Next</a>
+				</li>
+				<li><a href="?pageno=<?php echo $total_pages; ?>" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">Last</a></li>
+			</ul>
 
-				<!-- End of pagination  -->
-	<!-- 			<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+			<!-- End of pagination  -->
+			<!-- 			<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
 					Load More
 				</a> -->
-			</div>
+		</div>
 		</div>
 	</section>
 
@@ -884,7 +966,7 @@ include("includes/dbconfig.php");
 					<h4 class="stext-301 cl0 p-b-30">
 						Help
 					</h4>
-
+					`
 					<ul>
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
@@ -1061,6 +1143,7 @@ include("includes/dbconfig.php");
 			$('#m_title').html(cont[ind]['pd_name']);
 			$('#m_price').html('N' + cont[ind]['price']);
 			$('#m_desc').html(cont[ind]['description']);
+			$('#cart_form').attr('action', 'product.php?action=add&pid=' + cont[ind]['pd_id']);
 
 		});
 	</script>

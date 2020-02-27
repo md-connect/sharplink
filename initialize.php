@@ -1,7 +1,9 @@
 <?php
 
 $curl = curl_init();
+if(isset($_POST['pay']) && !empty($_POST['cus_email']) && !empty($_POST['cus_phone'])){
 
+}
 $email = "your@email.com";
 $amount = 30000;  //the amount in kobo. This value is actually NGN 300
 // url to go to after payment
