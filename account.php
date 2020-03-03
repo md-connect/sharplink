@@ -1,169 +1,24 @@
 <?php session_start();
-include('includes/dbconfig.php');
-$input_err = "";
-$lgn_input_err = "";
-$lgn_status = "";
-$status = "";
-$username = "";
-$pwd = "";
-function test_input($data)
-{
-    include("./includes/dbconfig.php");
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data = mysqli_real_escape_string($conn, $data);
-    return $data;
-}
+include("./includes/dbconfig.php");
+if (!empty($_GET["action"])) {
 
-if (isset($_POST['login'])) {
-    if (empty($_POST["username"])) {
-        $username = "";
-        $lng_input_err = "* This field is required";
-    } else {
-        $username = test_input($_POST['username']);
-    }
-    if (empty($_POST["pwd"])) {
-        $pwd = "";
-        $lng_input_err = "* This field is required";
-    } else {
-        $pwd = test_input($_POST['pwd']);
-    }
-
-    if ($input_err == "") {
-        $hash = password_hash($pwd, PASSWORD_DEFAULT);
-        $query_user = "SELECT * FROM customers WHERE email='$username'";
-        if (($query = mysqli_query($conn, $query_user)) && (mysqli_num_rows($query) == 1)) {
-            $row = mysqli_fetch_assoc($query);
-            $hash = $row['pwd'];
-            if (password_verify($pwd, $hash)) {
-                $_SESSION['auth'] = true;
-                $_SESSION['cus_id'] = $row['cus_id'];
-                $_SESSION['username'] = $row['email'];
-                $_SESSION['cus_name'] = $row['name'];
-                $_SESSION['cus_phone'] = $row['phone'];
-                $_SESSION['address'] = $row['address'];
-                $_SESSION['cus_image'] = $row['image'];
-                $id =  $_SESSION['cus_id'];
-                echo $_SESSION['username'];
-                header("Location: index.php");
-            } else {
-                $lgn_status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Incorrect login details!</strong>
-          </div>';
+    switch ($_GET["action"]) {
+            //code for adding product in cart
+            // code for removing product from cart
+        case "remove":
+            if (!empty($_SESSION["cart_item"])) {
+                foreach ($_SESSION["cart_item"] as $k => $v) {
+                    if ($_GET["code"] == $v['code'])
+                        unset($_SESSION["cart_item"][$k]);
+                    if (empty($_SESSION["cart_item"]))
+                        unset($_SESSION["cart_item"]);
+                }
             }
-        } else {
-            $lgn_status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>User does not exist!</strong>
-          </div>';
-        }
-    } else {
-        $lgn_status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Please fill all fields.</strong>
-          </div>';
-    }
-}
-
-/* Sign Up scripts */
-if (isset($_POST['signup'])) {
-    if (empty($_POST["name"])) {
-        $name = "";
-        $input_err = "* This field is required";
-    } else {
-        $name = test_input($_POST['name']);
-    }
-
-    if (empty($_POST["email"])) {
-        $email = "";
-        $input_err = "* This field is required";
-    } else {
-        $email = test_input($_POST['email']);
-    }
-
-    if (empty($_POST["phone"])) {
-        $phone = "";
-        $input_err = "* This field is required";
-    } else {
-        $phone = test_input($_POST["phone"]);
-    }
-
-    if (empty($_POST["address"])) {
-        $address = "";
-        $input_err = "* This field is required";
-    } else {
-        $address = test_input($_POST['address']);
-    }
-
-    if (empty($_POST["pwd"])) {
-        $pwd = "";
-        $input_err = "* This field is required";
-    } else {
-        $pwd = test_input($_POST['pwd']);
-    }
-
-    if (empty($_POST["npwd"])) {
-        $npwd = "";
-        $input_err = "* This field is required";
-    } else {
-        $npwd = test_input($_POST['npwd']);
-    }
-
-    $errors = array();
-    $passport_name = $_FILES['passport']['name'];
-    $temp = $_FILES['passport']['tmp_name'];
-    $types = $_FILES['passport']['type'];
-    $extension = array("jpeg", "jpg", "png", "gif");
-
-    $bytes = 20;
-    $KB = 1024;
-    $totalBytes = $bytes * $KB;
-    if ($_FILES["passport"]["size"][$temp] > $totalBytes) {
-        $UploadOk = false;
-        $status .= $passport_name . " file size is larger than the 20KB.";
-    }
-
-    $ext = pathinfo($passport_name, PATHINFO_EXTENSION);
-    if (in_array($ext, $extension) == false) {
-        $UploadOk = false;
-        $status .= $passport_name . " is invalid file type.";
-    }
-
-    if (file_exists("images/passports" . "/" . $passport_name) == true) {
-        $UploadOk = false;
-        $status .= $passport_name . " file is already exist.";
-    }
-
-    $check = mysqli_query($conn, "SELECT email FROM customers WHERE email='$email'");
-    if (mysqli_num_rows($check) == 1) {
-        $status .= '<div class="alert alert-danger">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Email has been used by another customer!</strong>
-</div>';
-    } else {
-        if ($input_err == "") {
-            $hash = password_hash($pwd, PASSWORD_DEFAULT);
-            $insert = mysqli_query($conn, "INSERT INTO customers (name, email, phone, address, image, pwd) 
-                VALUES('$name', '$email', '$phone', '$address', '$passport_name', '$hash')");
-            if ($insert) {
-                $status .= '<div class="alert alert-success">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Registeration was successfull, kindly proceed to login for you to place your order(s) now!</strong>
-</div>';
-            } else {
-                $status .= '<div class="alert alert-danger">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Unable to register customer currently, please try again later.</strong>
-</div>';
-            }
-        } else {
-            $status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Please fill all fields.</strong>
-          </div>';
-        }
+            break;
+            // code for if cart is empty
+        case "empty":
+            unset($_SESSION["cart_item"]);
+            break;
     }
 }
 
@@ -172,7 +27,7 @@ if (isset($_POST['signup'])) {
 <html lang="en">
 
 <head>
-    <title>Sharplink | Login</title>
+    <title>Customer Account</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -199,16 +54,6 @@ if (isset($_POST['signup'])) {
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
-
-    <style>
-        .right {
-            text-align: right;
-        }
-
-        .error {
-            color: red;
-        }
-    </style>
 </head>
 
 <body class="animsition">
@@ -299,14 +144,16 @@ if (isset($_POST['signup'])) {
                                     <li>
                                         <?php
                                         if (isset($_SESSION['username'])) {
+                                            $id = $_SESSION['cus_id'];
                                         ?>
                                             <div class="dropdown">
                                                 <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="zmdi zmdi-account-o" style="color: green;"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-item">Account</div>
+                                                    <a class="dropdown-item" href="account.php">My Account</a>
                                                     <a class="dropdown-item" href="account.php">My Orders</a>
+                                                    <a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
                                                     <a class="dropdown-item" href="logout.php">Log Out</a>
                                                 </div>
                                             </div>
@@ -359,14 +206,16 @@ if (isset($_POST['signup'])) {
                     <li>
                         <?php
                         if (isset($_SESSION['username'])) {
+                            $id = $_SESSION['cus_id'];
                         ?>
                             <div class="dropdown">
                                 <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="zmdi zmdi-account-o" style="color: green;"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-item">Account</div>
+                                    <a class="dropdown-item" href="account.php">My Account</a>
                                     <a class="dropdown-item" href="account.php">My Orders</a>
+                                    <a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
                                     <a class="dropdown-item" href="logout.php">Log Out</a>
                                 </div>
                             </div>
@@ -529,9 +378,34 @@ if (isset($_POST['signup'])) {
                                 View Cart
                             </a>
 
-                            <a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                                Check Out
-                            </a>
+                            <?php
+                            $items = "";
+                            $qty = 0;
+                            $num_item = ($_SESSION["cart_item"]);
+                            // die();
+                            foreach ($_SESSION["cart_item"] as $item) {
+                                if (count($num_item) == 1) {
+                                    $items = $item["code"];
+                                    $qty += $item["quantity"];
+                                } else {
+                                    $items .= '+' . $item["code"];
+                                    $qty += $item["quantity"];
+                                }
+                            }
+
+                            ?>
+                            <form method="POST" action="initialize.php">
+                                <div class="flex-w flex-m m-r-20 m-tb-5">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email" value="<?php echo $cus_email; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone" value="<?php echo $cus_phone; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items" placeholder="Customer's Items" value="<?php echo $items; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="quantity" placeholder="Quantity" value="<?php echo $qty; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="amount" placeholder="Amount" value="<?php echo $total_price; ?>">
+                                </div>
+                                <button name="pay" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" type="submit">
+                                    Check Out
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -570,7 +444,6 @@ if (isset($_POST['signup'])) {
     }
     ?>
 
-
     <!-- breadcrumb -->
     <div class="container">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -580,98 +453,288 @@ if (isset($_POST['signup'])) {
             </a>
 
             <span class="stext-109 cl4">
-                Login | Sign Up
+                Customer Account
             </span>
         </div>
     </div>
+    <?php
+    $id = $_SESSION['cus_id'];
+    $sql = "SELECT * FROM customers WHERE cus_id='$id'";
+    $query = $conn->query($sql);
+    if ($query->num_rows === 1) {
+        $row = mysqli_fetch_array($query);
+        // $id = $row['pd_id'];
+        $name = $row['name'];
+        /* $description = $row['description'];
+        $category = $row['pd_category'];
+        $type = $row['pd_type']; */
+    }
+    ?>
+    <!-- Customer Orders -->
+    <div class="container bg0 p-t-75 p-b-85">
+        <div class="row">
+            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+                <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                    <h4 class="mtext-109 cl2 p-b-30">
+                        My Information
+                    </h4>
 
-    <!-- Content page -->
-    <section class="bg0 p-t-104 p-b-116">
-        <div class="container">
-            <div class="flex-w flex-tr">
-                <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form method="post" name="customerLogin">
-                        <h4 class="mtext-105 cl2 txt-center p-b-30">
-                            Login Here
-                        </h4>
-                        <?php echo $lgn_status; ?>
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="username" placeholder="Your Username">
-                            <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                    <div class="flex-w flex-t bor12 p-b-13">
+                        <div class="size-208">
+                            <span class="stext-110 cl2">
+                                Name:
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $lgn_input_err; ?> </div>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="pwd" placeholder="Your Password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
+                        <div class="size-209">
+                            <span class="mtext-110 cl2">
+                                <?php echo $_SESSION['cus_name']; ?>
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $lgn_input_err; ?> </div>
-
-                        <button name="login" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                            Login
-                        </button>
-                        <a href="#">Forgot password?</a>
-                    </form>
-                </div>
-
-                <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
-                    <form method="post" enctype="multipart/form-data" name="customerReg">
-                        <h4 class="mtext-105 cl2 txt-center p-b-30">
-                            Sign Up Here
-                        </h4>
-                        <?php echo $status; ?>
-
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="name" placeholder="Enter your Full name">
-                            <img class="how-pos4 pointer-none" src="images/icons/user.png" alt="ICON">
+                    </div>
+                    <div class="flex-w flex-t bor12 p-b-13">
+                        <div class="size-208">
+                            <span class="stext-110 cl2">
+                                Phone:
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Enter your Email Address">
-                            <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                        <div class="size-209">
+                            <span class="mtext-110 cl2">
+                                <?php echo $_SESSION['cus_phone']; ?>
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
-
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="phone" placeholder="Enter your Mobile Number">
-                            <img class="how-pos4 pointer-none" src="images/icons/phone.png" alt="ICON">
+                    </div>
+                    <div class="flex-w flex-t bor12 p-b-13">
+                        <div class="size-208">
+                            <span class="stext-110 cl2">
+                                Email:
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="address" placeholder="Enter your Home Address">
-                            <img class="how-pos4 pointer-none" src="images/icons/address.png" alt="ICON">
+                        <div class="size-209">
+                            <span class="mtext-10 cl2">
+                                <?php echo $_SESSION['username']; ?>
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
-
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="pwd" placeholder="Choose a Password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
+                    </div>
+                    <div class="flex-w flex-t bor12 p-b-13">
+                        <div class="size-208">
+                            <span class="stext-110 cl2">
+                                Address:
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="npwd" placeholder="Confirm your Password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
+                        <div class="size-209">
+                            <span class="mtext-10 cl2">
+                                <?php echo $_SESSION['address']; ?>
+                            </span>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
+                    </div>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="file" name="passport">
-                            <img class="how-pos4 pointer-none" src="images/icons/user.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
+                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                        <h6 class="mtext-109 cl2 p-b-30">
+                            My Measurement
+                        </h6>
+                        <?php
+                        $sql2 = "SELECT * FROM customers WHERE cus_id = '$id'";
+                        $query = $conn->query($sql2);
+                        $row = mysqli_fetch_array($query);
+                        if (!empty($row['s_len']) && !empty($row['t_len'])) {
+                            $t_len = $row['t_len'];
+                            $t_waist = $row['t_waist'];
+                            $t_flap = $row['t_flap'];
+                            $t_lap = $row['t_lap'];
+                            $t_hip = $row['t_hip'];
+                            $t_knee = $row['t_knee'];
+                            $t_feet = $row['t_feet'];
+                            $s_glen = $row['s_glen'];
+                            $s_len = $row['s_len'];
+                            $s_chest = $row['s_chest'];
+                            $s_stomach = $row['s_stomach'];
+                            $s_shoulder = $row['s_shoulder'];
+                            $s_neck = $row['s_neck'];
+                            $s_arm = $row['s_arm'];
+                            $s_wrist = $row['s_wrist'];
+                            $s_sleeve = $row['s_sleeve'];
+                            $s_rsleeve = $row['s_rsleeve'];
+                            echo "
+                                <p class='mtext-109 cl2 p-b-30'>
+                                    Trouser Measurement
+                                </p>
+                                <div class='table-responsive'>
+                                    <table class='table'>
+                                        <tr class='table_head'>
+                                            <th>Length</th>
+                                            <th>Waist</th>
+                                            <th>Flap</th>
+                                            <th>Lap</th>
+                                            <th>Hip</th>
+                                            <th>Knee</th>
+                                            <th>Feet</th>
+                                        </tr>
+                                        <tr class='table_row'>
+                                            <td>$t_len</td>
+                                            <td>$t_waist </td>
+                                            <td>$t_flap</td>
+                                            <td>$t_lap</td>
+                                            <td>$t_hip</td>
+                                            <td>$t_knee</td>
+                                            <td>$t_feet</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                 <p class='mtext-109 cl2 p-b-30'>
+                                    Shirt/Cassock Measurement
+                                </p>
+                                <div class='table-responsive'>
+                                    <table class='table'>
+                                        <tr class='table_head'>
+                                            <th>Gown Length</th>
+                                            <th>Length</th>
+                                            <th>Chest</th>
+                                            <th>Stomach</th>
+                                            <th>Shoulder</th>
+                                            <th>Neck</th>
+                                            <th>Arm</th>
+                                            <th>Wrist</th>
+                                            <th>Sleeve</th>
+                                            <th>R/Sleeve</th>
+                                        </tr>
+                                        <tr class='table_row'>
+                                            <td>$s_glen</td>
+                                            <td>$s_len</td>
+                                            <td>$s_chest</td>
+                                            <td>$s_stomach</td>
+                                            <td>$s_shoulder</td>
+                                            <td>$s_neck</td>
+                                            <td>$s_arm</td>
+                                            <td>$s_wrist</td>
+                                            <td>$s_sleeve</td>
+                                            <td>$s_rsleeve</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                    ";
+                        } else {
+                            echo "<h3>You have not added your measurement info yet.</h3><br>
+                                    <a href='measurement.php?id=$id&url=' class='flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10'>
+                                    Add Measurement
+                                    </a>";
+                        }
+                        ?>
 
-                        <button name="signup" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                            Sign Up
-                        </button>
+                        <!-- <table class="table-responsive">
+                            <tr class="table_head">
+                                <th>Product</th>
+                                <th>AA</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
 
-                    </form>
+                            <tr class="table_row">
+                                <td>
+                                    12121
+                                </td>
+                                <td>Fresh </td>
+                                <td>$ 36.00</td>
+                                <td>
+                                    1212121
+                                </td>
+                                <td>$ 36.00</td>
+                            </tr>
+
+                        </table> -->
+                    </div>
                 </div>
             </div>
+            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+                <div class="m-l-25 m-r--38 m-lr-0-xl">
+                    <h4 class="mtext-109 cl2 p-b-30">
+                        My Orders
+                    </h4>
+                    <?php
+                    $sql3 = "SELECT 
+                    products.picture, products.pd_name, products.price, orders.quantity, orders.order_no, orders.date, orders.amount FROM orders 
+                                                INNER JOIN products
+                                                ON orders.pd_id=products.pd_id
+                                                WHERE cus_id = '$id'
+                                                ORDER BY id DESC";
+                    $query = $conn->query($sql3);
+                    if ($query->num_rows > 0) {
+                    ?>
+                        <div class="wrap-table-shopping-cart">
+                            <table class="table-shopping-cart">
+                                <tr class="table_head">
+                                    <th class="column-1">Order No</th>
+                                    <th class="column-1">Product</th>
+                                    <th class="column-2"></th>
+                                    <th class="column-3">Price</th>
+                                    <th class="column-4">Quantity</th>
+                                    <th class="column-5">Total</th>
+                                    <th class="column-6">Date</th>
+                                </tr>
+                                <?php
+                                while ($row = mysqli_fetch_array($query)) {
+                                    echo "
+                            <tr class='table_row'>
+                                <td class='column-1'>" . $row['order_no'] . "</td>
+                                <td class='column-1'>
+                                    <div class='how-itemcart1'>
+                                        <img src='images/" . $row['picture'] . "' alt='IMG'>
+                                    </div>
+                                </td>
+                                <td class='column-2'>" . $row['pd_name'] . "</td>
+                                <td class='column-3'>" . $row['price'] . "</td>
+                                <td class='column-1'> " . $row['quantity'] . " </td>
+                                <td class='column-5'>" . $row['amount'] . "</td>
+                                <td class='column-6'>" . $row['date'] . "</td>
+                            </tr>";
+                                }
+                                ?>
+                            </table>
+                        </div>
+                    <?php
+                    } else {
+                        echo "<h3>You haven't order anything from Sharplink yet.</h3><br>
+                        <a href='product.php' class='flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10'>
+						Shop Now
+					</a>";
+                    }
+                    ?>
+
+                </div>
+            </div>
+
+
         </div>
-    </section>
+    </div>
+    <!-- place below the html form -->
+    <script>
+        function payWithPaystack() {
+            var handler = PaystackPop.setup({
+                key: 'pk_test_0739a8b130f2807de84fc543778c2c816c7ab24d',
+                email: 'mondayoke93@gmail.com',
+                amount: 10000,
+                ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+                metadata: {
+                    custom_fields: [{
+                        display_name: "Mobile Number",
+                        variable_name: "mobile_number",
+                        value: "+2348068869769"
+                    }]
+                },
+                callback: function(response) {
+                    alert('success. transaction ref is ' + response.reference);
+                },
+                onClose: function() {
+                    alert('window closed');
+                }
+            });
+            handler.openIframe();
+        }
+    </script>
 
 
 

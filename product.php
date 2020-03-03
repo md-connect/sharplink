@@ -110,7 +110,7 @@ if (!empty($_GET["action"])) {
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for orders around Okokomaiko Axis
+						Free shipping for standard order around Okokomaiko Axis
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
@@ -118,9 +118,16 @@ if (!empty($_GET["action"])) {
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 
 						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -133,7 +140,7 @@ if (!empty($_GET["action"])) {
 				</div>
 			</div>
 
-			<div class="wrap-menu-desktop how-shadow1">
+			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
@@ -146,7 +153,6 @@ if (!empty($_GET["action"])) {
 						<ul class="main-menu">
 							<li>
 								<a href="index.php">Home</a>
-
 							</li>
 
 							<li class="active-menu">
@@ -157,43 +163,63 @@ if (!empty($_GET["action"])) {
 								<a href="shoping-cart.php">Features</a>
 							</li>
 
-							<!-- 	<li>
-								<a href="blog.html">Blog</a>
-							</li>
-								 -->
 							<li>
-								<a href="about.php">About</a>
+								<a href="about.php">About Us</a>
 							</li>
 
 							<li>
-								<a href="contact.php">Contact</a>
-							</li>
+								<a href="contact.php">Contact Us</a>
+							</li </ul> </div> <!-- Icon header -->
+							<div class="wrap-icon-header flex-w flex-r-m">
+								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+									<i class="zmdi zmdi-search"></i>
+								</div>
 
-						</ul>
-					</div>
+								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php
+																																			if (isset($_SESSION['cart_item'])) {
+																																				echo count($_SESSION['cart_item']);
+																																			} else {
+																																				echo "0";
+																																			} ?>">
+									<i class="zmdi zmdi-shopping-cart"></i>
+								</div>
 
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
+								<ul>
+									<li>
+										<?php
+										if (isset($_SESSION['username'])) {
+											$id = $_SESSION['cus_id'];
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: green;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="account.php">My Account</a>
+													<a class="dropdown-item" href="account.php">My Orders</a>
+													<a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
+													<a class="dropdown-item" href="logout.php">Log Out</a>
+												</div>
+											</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php
-																																	if (isset($_SESSION['cart_item'])) {
-																																		echo count($_SESSION['cart_item']);
-																																	} else {
-																																		echo "0";
-																																	} ?>">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
-
-						<!-- <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a> -->
-						<li>
-							<a href="login.php">Login | Sign Up</a>
-						</li>
-					</div>
+										<?php
+										} else {
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="login.php">Sign in</a>
+													<a class="dropdown-item" href="login.php">Sign Up</a>
+												</div>
+											</div>
+										<?php
+										}
+										?>
+									</li>
+								</ul>
+							</div>
 				</nav>
 			</div>
 		</div>
@@ -220,9 +246,42 @@ if (!empty($_GET["action"])) {
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<!-- 	<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a> -->
+				<ul>
+					<li>
+						<?php
+						if (isset($_SESSION['username'])) {
+							$id = $_SESSION['cus_id'];
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: green;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="account.php">My Account</a>
+									<a class="dropdown-item" href="account.php">My Orders</a>
+									<a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
+									<a class="dropdown-item" href="logout.php">Log Out</a>
+								</div>
+							</div>
+
+						<?php
+						} else {
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="login.php">Sign in</a>
+									<a class="dropdown-item" href="login.php">Sign Up</a>
+								</div>
+							</div>
+						<?php
+						}
+						?>
+
+					</li>
+				</ul>
 			</div>
 
 			<!-- Button show menu -->
@@ -241,25 +300,22 @@ if (!empty($_GET["action"])) {
 					<div class="left-top-bar">
 						Free shipping for standard order around Okokomaiko Axis
 					</div>
-				</li>
 
-				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
-						<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a> -->
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 					</div>
 				</li>
 			</ul>
@@ -267,31 +323,27 @@ if (!empty($_GET["action"])) {
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-
 				</li>
 
-				<li>
+				<li class="active-menu">
 					<a href="product.php">Shop</a>
 				</li>
 
-				<li>
-					<a href="shoping-cart.php" class="label1 rs1" data-label1="hot">Features</a>
+				<li class="label1" data-label1="hot">
+					<a href="shoping-cart.php">Features</a>
 				</li>
 
-				<!-- <li>
-					<a href="blog.html">Blog</a>
-				</li> -->
-
 				<li>
-					<a href="about.php">About</a>
+					<a href="about.php">About Us</a>
 				</li>
 
 				<li>
 					<a href="contact.php">Contact Us</a>
 				</li>
-				<li>
-					<a href="contact.php">Login | Sign Up</a>
-				</li>
+
+				<!-- <li>
+					<a href="login.php">Login | Sign Up</a>
+				</li> -->
 			</ul>
 		</div>
 
@@ -370,9 +422,34 @@ if (!empty($_GET["action"])) {
 								View Cart
 							</a>
 
-							<a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-								Check Out
-							</a>
+							<?php
+							$items = "";
+							$qty = 0;
+							$num_item = ($_SESSION["cart_item"]);
+							// die();
+							foreach ($_SESSION["cart_item"] as $item) {
+								if (count($num_item) == 1) {
+									$items = $item["code"];
+									$qty += $item["quantity"];
+								} else {
+									$items .= '+' . $item["code"];
+									$qty += $item["quantity"];
+								}
+							}
+
+							?>
+							<form method="POST" action="initialize.php">
+								<div class="flex-w flex-m m-r-20 m-tb-5">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email" value="<?php echo $cus_email; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone" value="<?php echo $cus_phone; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items" placeholder="Customer's Items" value="<?php echo $items; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="quantity" placeholder="Quantity" value="<?php echo $qty; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="amount" placeholder="Amount" value="<?php echo $total_price; ?>">
+								</div>
+								<button name="pay" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" type="submit">
+									Check Out
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -419,7 +496,7 @@ if (!empty($_GET["action"])) {
 					Product Overview
 				</h3>
 			</div>
-
+			<div class="searchproducts"></div>
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
@@ -433,14 +510,14 @@ if (!empty($_GET["action"])) {
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
 						Men
 					</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".senator">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Senator">
 						Senator Materials
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".native">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Native">
 						Natives
 					</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".suit">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Suit">
 						Suits
 					</button>
 
@@ -464,16 +541,15 @@ if (!empty($_GET["action"])) {
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+						<button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 							<i class="zmdi zmdi-search"></i>
 						</button>
 
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+						<input id="searchkey" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search" onKeyup="searchbykey(this.value);">
 					</div>
 				</div>
-
 				<!-- Filter -->
-				<div class="dis-none panel-filter w-full p-t-10">
+				<!-- <div class="dis-none panel-filter w-full p-t-10">
 					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
 						<div class="filter-col1 p-r-15 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
@@ -659,7 +735,7 @@ if (!empty($_GET["action"])) {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
 			<!-- Pagination -->
@@ -694,7 +770,7 @@ if (!empty($_GET["action"])) {
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="images/<?php echo $row['picture']; ?>" alt="IMG-PRODUCT" height="240">
+									<img src="images/<?php echo $row['picture']; ?>" alt="IMG-PRODUCT" height="300">
 
 									<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" data-mod=<?php echo $j; ?>>
 										Quick View
@@ -703,7 +779,7 @@ if (!empty($_GET["action"])) {
 
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
-										<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<a href="product-detail.php?pid=<?php echo $row['pd_id']; ?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 											<?php echo $row['pd_name']; ?>
 										</a>
 
@@ -1098,7 +1174,7 @@ if (!empty($_GET["action"])) {
 	<script src="vendor/select2/select2.min.js"></script>
 	<script>
 		let cont = <?php echo json_encode($array_list); ?>;
-		console.log(cont);
+		// console.log(cont);
 		$('.js-show-modal1').click(function(e) {
 			e.preventDefault();
 			//get index
@@ -1248,28 +1324,28 @@ if (!empty($_GET["action"])) {
 	</script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-	<!-- <script>
+	<script>
+		function searchbykey(val) {
+			// var keywords = $('#searchkey').value();
+			//console.log(val);
+			$.ajax({
+				url: 'includes/products.php',
+				method: 'POST',
+				data: "search_str=" + val,
+				success: function(data) {
+					$('#searchproducts').html(data);
+				}
+			});
+		}
 		$(document).ready(function() {
-			function products() {
-				$.ajax({
-					url: 'includes/products.php',
-					method: 'POST',
-					data: {
-						products: 1
-					},
-					success: function(data) {
-						$('#allproducts').html(data);
-					}
-				})
-			}
-			products();
+			/* products();
 
-			$('body').delegate('.js-show-modal1', 'click', function(e) {
-				e.preventDefault();
-				$('.js-modal1').addClass('show-modal1');
-			})
+						$('body').delegate('.js-show-modal1', 'click', function(e) {
+							e.preventDefault();
+							$('.js-modal1').addClass('show-modal1');
+						}) */
 
-			$('body').delegate('.js-show-modal1', 'click', function(e) {
+			/* $('body').delegate('.js-show-modal1', 'click', function(e) {
 				e.preventDefault();
 				var pid = $(this).attr('pid');
 				alert(pid);
@@ -1285,7 +1361,7 @@ if (!empty($_GET["action"])) {
 					}
 				})
 
-			})
+			}) */
 
 			/* $('.js-hide-modal1').on('click', function() {
 				$('.js-modal1').removeClass('show-modal1')

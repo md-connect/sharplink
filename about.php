@@ -36,7 +36,7 @@
 <body class="animsition">
 
 	<!-- Header -->
-	<header>
+	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
@@ -51,9 +51,16 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 
 						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -110,17 +117,42 @@
 									<i class="zmdi zmdi-shopping-cart"></i>
 								</div>
 
-								<!-- <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-									<i class="zmdi zmdi-favorite-outline"></i>
-									</a> -->
 								<ul>
 									<li>
-										<a href="login.php">Login | Sign Up</a>
+										<?php
+										if (isset($_SESSION['username'])) {
+											$id = $_SESSION['cus_id'];
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: green;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="account.php">My Account</a>
+													<a class="dropdown-item" href="account.php">My Orders</a>
+													<a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
+													<a class="dropdown-item" href="logout.php">Log Out</a>
+												</div>
+											</div>
+
+										<?php
+										} else {
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="login.php">Sign in</a>
+													<a class="dropdown-item" href="login.php">Sign Up</a>
+												</div>
+											</div>
+										<?php
+										}
+										?>
 									</li>
 								</ul>
-								<!-- <a href="contact.html">Login | Sign Up</a> -->
 							</div>
-
 				</nav>
 			</div>
 		</div>
@@ -147,9 +179,42 @@
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<!-- 	<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a> -->
+				<ul>
+					<li>
+						<?php
+						if (isset($_SESSION['username'])) {
+							$id = $_SESSION['cus_id'];
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: green;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="account.php">My Account</a>
+									<a class="dropdown-item" href="account.php">My Orders</a>
+									<a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
+									<a class="dropdown-item" href="logout.php">Log Out</a>
+								</div>
+							</div>
+
+						<?php
+						} else {
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="login.php">Sign in</a>
+									<a class="dropdown-item" href="login.php">Sign Up</a>
+								</div>
+							</div>
+						<?php
+						}
+						?>
+
+					</li>
+				</ul>
 			</div>
 
 			<!-- Button show menu -->
@@ -174,9 +239,16 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 					</div>
 				</li>
 			</ul>
@@ -202,9 +274,9 @@
 					<a href="contact.php">Contact Us</a>
 				</li>
 
-				<li>
+				<!-- <li>
 					<a href="login.php">Login | Sign Up</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 
@@ -282,9 +354,34 @@
 								View Cart
 							</a>
 
-							<a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-								Check Out
-							</a>
+							<?php
+							$items = "";
+							$qty = 0;
+							$num_item = ($_SESSION["cart_item"]);
+							// die();
+							foreach ($_SESSION["cart_item"] as $item) {
+								if (count($num_item) == 1) {
+									$items = $item["code"];
+									$qty += $item["quantity"];
+								} else {
+									$items .= '+' . $item["code"];
+									$qty += $item["quantity"];
+								}
+							}
+
+							?>
+							<form method="POST" action="initialize.php">
+								<div class="flex-w flex-m m-r-20 m-tb-5">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email" value="<?php echo $cus_email; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone" value="<?php echo $cus_phone; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items" placeholder="Customer's Items" value="<?php echo $items; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="quantity" placeholder="Quantity" value="<?php echo $qty; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="amount" placeholder="Amount" value="<?php echo $total_price; ?>">
+								</div>
+								<button name="pay" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" type="submit">
+									Check Out
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>

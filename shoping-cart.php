@@ -1,7 +1,10 @@
 <?php session_start();
-
+if (isset($_SESSION['username'])) {
+	$cus_id = $_SESSION['cus_id'];
+	$cus_email = $_SESSION['username'];
+	$cus_phone = $_SESSION['cus_phone'];
+}
 if (!empty($_GET["action"])) {
-
 	switch ($_GET["action"]) {
 			//code for adding product in cart
 			// code for removing product from cart
@@ -66,7 +69,7 @@ if (!empty($_GET["action"])) {
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						Free shipping for standard order around Okokomaiko Axis
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
@@ -74,9 +77,16 @@ if (!empty($_GET["action"])) {
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 
 						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -89,7 +99,7 @@ if (!empty($_GET["action"])) {
 				</div>
 			</div>
 
-			<div class="wrap-menu-desktop how-shadow1">
+			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
 
 					<!-- Logo desktop -->
@@ -102,7 +112,6 @@ if (!empty($_GET["action"])) {
 						<ul class="main-menu">
 							<li>
 								<a href="index.php">Home</a>
-
 							</li>
 
 							<li>
@@ -113,53 +122,62 @@ if (!empty($_GET["action"])) {
 								<a href="shoping-cart.php">Features</a>
 							</li>
 
-							<!-- 	<li>
-								<a href="blog.html">Blog</a>
-							</li>
-								 -->
 							<li>
-								<a href="about.php">About</a>
+								<a href="about.php">About Us</a>
 							</li>
 
 							<li>
 								<a href="contact.php">Contact Us</a>
-							</li>
+							</li </ul> </div> <!-- Icon header -->
+							<div class="wrap-icon-header flex-w flex-r-m">
+								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+									<i class="zmdi zmdi-search"></i>
+								</div>
 
-						</ul>
-					</div>
+								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php
+																																			if (isset($_SESSION['cart_item'])) {
+																																				echo count($_SESSION['cart_item']);
+																																			} else {
+																																				echo "0";
+																																			} ?>">
+									<i class="zmdi zmdi-shopping-cart"></i>
+								</div>
 
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
-
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php
-																																	if (isset($_SESSION['cart_item'])) {
-																																		echo count($_SESSION['cart_item']);
-																																	} else {
-																																		echo "0";
-																																	} ?>">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
-
-						<!-- <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a> -->
-						<ul class="main-menu-m">
-							<li>
-								<a href="login.php">Your Account</a>
-								<ul class="sub-menu-m">
-									<li><a href="account.php">Account</a></li>
-									<li><a href="orders.php">My Orders</a></li>
-									<li><a href="logout.php">Log Out</a></li>
+								<ul>
+									<li>
+										<?php
+										if (isset($_SESSION['username'])) {
+											$id = $_SESSION['cus_id'];
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: green;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="account.php">My Account</a>
+													<a class="dropdown-item" href="account.php">My Orders</a>
+													<a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
+													<a class="dropdown-item" href="logout.php">Log Out</a>
+												</div>
+											</div>
+										<?php
+										} else {
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="login.php">Sign in</a>
+													<a class="dropdown-item" href="login.php">Sign Up</a>
+												</div>
+											</div>
+										<?php
+										}
+										?>
+									</li>
 								</ul>
-								<span class="arrow-main-menu-m">
-									<i class="fa fa-angle-right" aria-hidden="true"></i>
-								</span>
-							</li>
-						</ul>
-					</div>
+							</div>
 				</nav>
 			</div>
 		</div>
@@ -186,9 +204,42 @@ if (!empty($_GET["action"])) {
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a>
+				<ul>
+					<li>
+						<?php
+						if (isset($_SESSION['username'])) {
+							$id = $_SESSION['cus_id'];
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: green;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="account.php">My Account</a>
+									<a class="dropdown-item" href="account.php">My Orders</a>
+									<a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
+									<a class="dropdown-item" href="logout.php">Log Out</a>
+								</div>
+							</div>
+
+						<?php
+						} else {
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="login.php">Sign in</a>
+									<a class="dropdown-item" href="login.php">Sign Up</a>
+								</div>
+							</div>
+						<?php
+						}
+						?>
+
+					</li>
+				</ul>
 			</div>
 
 			<!-- Button show menu -->
@@ -207,25 +258,22 @@ if (!empty($_GET["action"])) {
 					<div class="left-top-bar">
 						Free shipping for standard order around Okokomaiko Axis
 					</div>
-				</li>
 
-				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
-						<!-- <a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a> -->
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 					</div>
 				</li>
 			</ul>
@@ -233,39 +281,27 @@ if (!empty($_GET["action"])) {
 			<ul class="main-menu-m">
 				<li>
 					<a href="index.php">Home</a>
-
 				</li>
 
 				<li>
 					<a href="product.php">Shop</a>
 				</li>
 
-				<li>
-					<a href="shoping-cart.php" class="label1 rs1" data-label1="hot">Features</a>
+				<li class="label1 active-menu data-label1=" hot">
+					<a href="shoping-cart.php">Features</a>
 				</li>
 
-				<!-- <li>
-					<a href="blog.html">Blog</a>
-				</li> -->
-
 				<li>
-					<a href="about.php">About</a>
+					<a href="about.php">About Us</a>
 				</li>
 
 				<li>
 					<a href="contact.php">Contact Us</a>
 				</li>
+
 				<!-- <li>
-								<a href="login.php">Your Account</a>
-								<ul class="sub-menu-m">
-									<li><a href="account.php">Account</a></li>
-									<li><a href="orders.php">My Orders</a></li>
-									<li><a href="logout.php">Log Out</a></li>
-								</ul>
-								<span class="arrow-main-menu-m">
-									<i class="fa fa-angle-right" aria-hidden="true"></i>
-								</span>
-							</li> -->
+					<a href="login.php">Login | Sign Up</a>
+				</li> -->
 			</ul>
 		</div>
 
@@ -343,10 +379,34 @@ if (!empty($_GET["action"])) {
 							<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 								View Cart
 							</a>
+							<?php
+							$items = "";
+							$qty = 0;
+							$num_item = ($_SESSION["cart_item"]);
+							// die();
+							foreach ($_SESSION["cart_item"] as $item) {
+								if (count($num_item) == 1) {
+									$items = $item["code"];
+									$qty += $item["quantity"];
+								} else {
+									$items .= '+' . $item["code"];
+									$qty += $item["quantity"];
+								}
+							}
 
-							<a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-								Check Out
-							</a>
+							?>
+							<form method="POST" action="initialize.php">
+								<div class="flex-w flex-m m-r-20 m-tb-5">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email" value="<?php echo $cus_email; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone" value="<?php echo $cus_phone; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items" placeholder="Customer's Items" value="<?php echo $items; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="quantity" placeholder="Quantity" value="<?php echo $qty; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="amount" placeholder="Amount" value="<?php echo $total_price; ?>">
+								</div>
+								<button name="pay" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" type="submit">
+									Check Out
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -368,7 +428,9 @@ if (!empty($_GET["action"])) {
 					</div>
 				</div>
 
-				<div class="no-records">Your Cart is Empty</div>
+				<div class="no-records">
+					<h3 style="text-align: center; padding-bottom: 50px;">Your Cart is Empty</h3>
+				</div>
 				<div class="header-cart-buttons flex-w w-full">
 					<a href="product.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 						Shop Now
@@ -405,7 +467,7 @@ if (!empty($_GET["action"])) {
 	?>
 
 		<!-- Shoping Cart -->
-		<form class="bg0 p-t-75 p-b-85">
+		<form class="bg0 p-t-75 p-b-85" method="POST" action="initialize.php">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -455,42 +517,11 @@ if (!empty($_GET["action"])) {
 										$total_price += ($item["price"] * $item["quantity"]);
 									}
 									?>
-									<!-- <tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-									<td class="column-5">Remove</td>
-								</tr> -->
 								</table>
 							</div>
 
 							<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
-								<div class="flex-w flex-m m-r-20 m-tb-5">
-									<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
-
-									<div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-										Apply coupon
-									</div>
-								</div>
-
 								<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 									Update Cart
 								</div>
@@ -530,36 +561,6 @@ if (!empty($_GET["action"])) {
 										There are no shipping methods available. Please double check your address, or
 										contact us if you need any help.
 									</p>
-
-									<div class="p-t-15">
-										<span class="stext-112 cl8">
-											Calculate Shipping
-										</span>
-
-										<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-											<select class="js-select2" name="time">
-												<option>Select a country...</option>
-												<option>USA</option>
-												<option>UK</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-
-										<div class="bor8 bg0 m-b-12">
-											<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country">
-										</div>
-
-										<div class="bor8 bg0 m-b-22">
-											<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip">
-										</div>
-
-										<div class="flex-w">
-											<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-												Update Totals
-											</div>
-										</div>
-
-									</div>
 								</div>
 							</div>
 
@@ -576,31 +577,27 @@ if (!empty($_GET["action"])) {
 									</span>
 								</div>
 							</div>
+							<?php
+							/* $items = "";
+							$qty = 0;
+							foreach ($_SESSION["cart_item"] as $item) {
+								if (count($item) == 1) {
+									$items .= $item["code"];
+									$qty += $item["quantity"];
+								} else {
+									$items .= $item["code"] . '&&';
+									$qty += $item["quantity"];
+								}
+							} */
 
-
-							<div class="input-group">
-								<input name="cus_email" type="text" value="<?php //echo $_SESSION['cus_email']; 
-																			?>" />
-								<input name="cus_phone" type="text" value="<?php //echo $_SESSION['cus_phone']; 
-																			?>" />
-								<input name="item[]" type="text" value="<?php //echo $_SESSION['cart_item']; 
-																		?>" />
-								<input name=" cus_email" type="text" />
-
-							</div>
+							?>
 							<div class="flex-w flex-m m-r-20 m-tb-5">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items[]" placeholder="Customer's Items" value="<?php echo $_SESSION['cart_item'][$k];
-																																										?>">
-								<input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Customer's Email">
-
+								<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email" value="<?php echo $cus_email; ?>">
+								<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone" value="<?php echo $cus_phone; ?>">
+								<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items" placeholder="Customer's Items" value="<?php echo $items; ?>">
+								<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="quantity" placeholder="Quantity" value="<?php echo $qty; ?>">
+								<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="amount" placeholder="Amount" value="<?php echo $total_price; ?>">
 							</div>
-
-							<!-- <script src="https://js.paystack.co/v1/inline.js"></script> -->
-							<!-- <button type="button" onclick="payWithPaystack()"> Pay </button> -->
-
-
 							<button name="pay" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" type="submit">
 								Proceed to Payment
 							</button>
@@ -612,38 +609,13 @@ if (!empty($_GET["action"])) {
 	<?php
 	} else {
 	?>
-		<div class="no-records">Your Cart is Empty</div>
+		<div class="no-records">
+			<h3 style="text-align: center; padding:100px;">Your Cart is Empty</h3>
+		</div>
 	<?php
 	}
 	?>
-	<!-- end of Testing cart  -->
-	<!-- place below the html form -->
-	<script>
-		function payWithPaystack() {
-			var handler = PaystackPop.setup({
-				key: 'pk_test_0739a8b130f2807de84fc543778c2c816c7ab24d',
-				email: 'mondayoke93@gmail.com',
-				amount: 10000,
-				ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-				metadata: {
-					custom_fields: [{
-						display_name: "Mobile Number",
-						variable_name: "mobile_number",
-						value: "+2348068869769"
-					}]
-				},
-				callback: function(response) {
-					alert('success. transaction ref is ' + response.reference);
-				},
-				onClose: function() {
-					alert('window closed');
-				}
-			});
-			handler.openIframe();
-		}
-	</script>
-
-
+	<!-- end of  cart  -->
 
 
 

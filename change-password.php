@@ -1,4 +1,7 @@
 <?php session_start();
+if (!$_SESSION['username']) {
+	header("Location: login.php");
+}
 include('includes/dbconfig.php');
 $input_err = "";
 $status = "";
@@ -6,60 +9,59 @@ $username = "";
 $pwd_hash = "";
 function test_input($data)
 {
-    include("includes/dbconfig.php");
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data = mysqli_real_escape_string($conn, $data);
-    return $data;
+	include("includes/dbconfig.php");
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	$data = mysqli_real_escape_string($conn, $data);
+	return $data;
 }
 $id = $_GET['id'];
 if (isset($_POST['changepwd'])) {
-    if (empty($_POST["pwd"])) {
-        // $username="";
-        $input_err = "* This field is required";
-    } else {
-        $pwd = test_input($_POST['pwd']);
-    }
-    if (empty($_POST["npwd"])) {
-        // $username="";
-        $input_err = "* This field is required";
-    } else {
-        $npwd = test_input($_POST['npwd']);
-    }
-    if ($pwd == $npwd) {
-        $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
-        $sql = "UPDATE customers SET pwd='$pwd_hash' WHERE id='$id'";
-        if ($query = mysqli_query($conn, $sql)) {
+	if (empty($_POST["pwd"])) {
+		// $username="";
+		$input_err = "* This field is required";
+	} else {
+		$pwd = test_input($_POST['pwd']);
+	}
+	if (empty($_POST["npwd"])) {
+		// $username="";
+		$input_err = "* This field is required";
+	} else {
+		$npwd = test_input($_POST['npwd']);
+	}
+	if ($pwd == $npwd) {
+		$pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
+		$sql = "UPDATE customers SET pwd='$pwd_hash' WHERE id='$id'";
+		if ($query = mysqli_query($conn, $sql)) {
 ?>
-            <script>
-                alert("Password reset was successful, please proceeed to login.");
-                window.location.assign("login.php");
-            </script>
+			<script>
+				alert("Password reset was successful, please proceeed to login.");
+				window.location.assign("login.php");
+			</script>
+			<?php
+		} else {
+			$sql = "UPDATE admin SET pwd='$pwd_hash' WHERE id='$id'";
+			if ($query = mysqli_query($conn, $sql)) {
+			?>
+				<script>
+					alert("Password reset was successful, please proceeed to login.");
+					window.location.assign("login.php");
+				</script>
 <?php
-        } else {
-            $sql = "UPDATE admin SET pwd='$pwd_hash' WHERE id='$id'";
-        if ($query = mysqli_query($conn, $sql)) {
-?>
-            <script>
-                alert("Password reset was successful, please proceeed to login.");
-                window.location.assign("login.php");
-            </script>
-<?php
-        } else {
-            $status .= '<div class="alert alert-danger">
+			} else {
+				$status .= '<div class="alert alert-danger">
                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                   <strong>Password reset failed, please try again later.</strong>
           </div>';
-        }
-           
-}
-}else {
-        $status .= '<div class="alert alert-danger">
+			}
+		}
+	} else {
+		$status .= '<div class="alert alert-danger">
                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                   <strong>Password does not match!</strong>
           </div>';
-    }
+	}
 }
 ?>
 
@@ -106,8 +108,8 @@ if (isset($_POST['changepwd'])) {
 <link rel="stylesheet" type="text/css" href="./assets/vendor/style.css">
 
 <body>
-   <!-- Header -->
-	<header>
+	<!-- Header -->
+	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
@@ -122,9 +124,16 @@ if (isset($_POST['changepwd'])) {
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 
 						<!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -148,7 +157,7 @@ if (isset($_POST['changepwd'])) {
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li class="active-menu">
+							<li>
 								<a href="index.php">Home</a>
 							</li>
 
@@ -160,7 +169,7 @@ if (isset($_POST['changepwd'])) {
 								<a href="shoping-cart.php">Features</a>
 							</li>
 
-							<li>
+							<li class="active-menu">
 								<a href="about.php">About Us</a>
 							</li>
 
@@ -172,7 +181,7 @@ if (isset($_POST['changepwd'])) {
 									<i class="zmdi zmdi-search"></i>
 								</div>
 
-								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php session_start();
+								<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php
 																																			if (isset($_SESSION['cart_item'])) {
 																																				echo count($_SESSION['cart_item']);
 																																			} else {
@@ -181,15 +190,40 @@ if (isset($_POST['changepwd'])) {
 									<i class="zmdi zmdi-shopping-cart"></i>
 								</div>
 
-								<!-- <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a> -->
 								<ul>
 									<li>
-										<a href="login.php">Login | Sign Up</a>
+										<?php
+										if (isset($_SESSION['username'])) {
+
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: green;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="account.php">My Account</a>
+													<a class="dropdown-item" href="account.php">My Orders</a>
+													<a class="dropdown-item" href="logout.php">Log Out</a>
+												</div>
+											</div>
+
+										<?php
+										} else {
+										?>
+											<div class="dropdown">
+												<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+												</a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<a class="dropdown-item" href="login.php">Sign in</a>
+													<a class="dropdown-item" href="login.php">Sign Up</a>
+												</div>
+											</div>
+										<?php
+										}
+										?>
 									</li>
 								</ul>
-								<!-- <a href="contact.html">Login | Sign Up</a> -->
 							</div>
 				</nav>
 			</div>
@@ -208,18 +242,50 @@ if (isset($_POST['changepwd'])) {
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php session_start();
-																																			if (isset($_SESSION['cart_item'])) {
-																																				echo count($_SESSION['cart_item']);
-																																			} else {
-																																				echo "0";
-																																			} ?>">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="<?php
+																															if (isset($_SESSION['cart_item'])) {
+																																echo count($_SESSION['cart_item']);
+																															} else {
+																																echo "0";
+																															} ?>">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
-				<!-- 	<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
-					<i class="zmdi zmdi-favorite-outline"></i>
-				</a> -->
+				<ul>
+					<li>
+						<?php
+						if (isset($_SESSION['username'])) {
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: green;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="account.php">My Account</a>
+									<a class="dropdown-item" href="account.php">My Orders</a>
+									<a class="dropdown-item" href="change-password.php">Change Password</a>
+									<a class="dropdown-item" href="logout.php">Log Out</a>
+								</div>
+							</div>
+
+						<?php
+						} else {
+						?>
+							<div class="dropdown">
+								<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="zmdi zmdi-account-o" style="color: orange;"></i>
+								</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" href="login.php">Sign in</a>
+									<a class="dropdown-item" href="login.php">Sign Up</a>
+								</div>
+							</div>
+						<?php
+						}
+						?>
+
+					</li>
+				</ul>
 			</div>
 
 			<!-- Button show menu -->
@@ -244,15 +310,22 @@ if (isset($_POST['changepwd'])) {
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						<?php if (isset($_SESSION['username'])) {
+							$customer = $_SESSION['username'];
+							echo "<a href='account.php' class='flex-c-m p-lr-10 trans-04'>
+                            $customer
+                        </a>";
+						} else {
+							echo "<a href='login.php' class='flex-c-m p-lr-10 trans-04'>
+                            My Account
+                        </a>";
+						} ?>
 					</div>
 				</li>
 			</ul>
 
 			<ul class="main-menu-m">
-				<li class="active-menu">
+				<li>
 					<a href="index.php">Home</a>
 				</li>
 
@@ -264,7 +337,7 @@ if (isset($_POST['changepwd'])) {
 					<a href="shoping-cart.php">Features</a>
 				</li>
 
-				<li>
+				<li class="active-menu">
 					<a href="about.php">About Us</a>
 				</li>
 
@@ -272,9 +345,9 @@ if (isset($_POST['changepwd'])) {
 					<a href="contact.php">Contact Us</a>
 				</li>
 
-				<li>
-					<a href="contact.php">Login | Sign Up</a>
-				</li>
+				<!-- <li>
+					<a href="login.php">Login | Sign Up</a>
+				</li> -->
 			</ul>
 		</div>
 
@@ -294,39 +367,163 @@ if (isset($_POST['changepwd'])) {
 			</div>
 		</div>
 	</header>
+	<?php
+	if (isset($_SESSION["cart_item"])) {
+		$total_quantity = 0;
+		$total_price = 0;
+	?>
+		<!-- Cart -->
+		<div class="wrap-header-cart js-panel-cart">
+			<div class="s-full js-hide-cart"></div>
 
-     <!-- Content page -->
-    <section class="bg0 p-t-104 p-b-116">
-        <div class="container" >
-            <div class="flex-w flex-tr">
-                <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form method="post" name="customerLogin">
-                        <h4 class="mtext-105 cl2 txt-center p-b-30">
-                            Change Your Password
-                        </h4>
-                        <?php echo $status; ?>
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="pwd" placeholder="Enter new password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
+			<div class="header-cart flex-col-l p-l-65 p-r-25">
+				<div class="header-cart-title flex-w flex-sb-m p-b-8">
+					<span class="mtext-103 cl2">
+						Your Cart
+					</span>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="npwd" placeholder="Re-enter your new password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
+					<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+						<i class="zmdi zmdi-close"></i>
+					</div>
+				</div>
+				<div class="header-cart-content flex-w js-pscroll">
+					<ul class="header-cart-wrapitem w-full">
+						<?php
+						foreach ($_SESSION["cart_item"] as $item) {
+							$item_price = $item["quantity"] * $item["price"];
+						?>
+							<li class="header-cart-item flex-w flex-t m-b-12">
+								<div class="header-cart-item-img">
+									<img src="./images/<?php echo $item["image"]; ?>" alt="IMG">
+								</div>
 
-                        <button name="changepwd" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                            Change Password
-                        </button>
-                    </form>
-                </div>
+								<div class="header-cart-item-txt p-t-8">
+									<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+										<?php echo $item["name"]; ?>
+									</a>
 
-                
-            </div>
-        </div>
-    </section>
+									<span class="header-cart-item-info">
+										<?php echo $item["quantity"] . "x N " . $item["price"]; ?>
+									</span>
+								</div>
+							</li>
+
+						<?php
+							$total_quantity += $item["quantity"];
+							$total_price += ($item["price"] * $item["quantity"]);
+						}
+						?>
+					</ul>
+
+					<div class="w-full">
+						<div class="header-cart-total w-full p-tb-40">
+							Total: <?php echo "N " . number_format($total_price, 2); ?>
+						</div>
+
+						<div class="header-cart-buttons flex-w w-full">
+							<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+								View Cart
+							</a>
+
+							<?php
+							$items = "";
+							$qty = 0;
+							$num_item = ($_SESSION["cart_item"]);
+							// die();
+							foreach ($_SESSION["cart_item"] as $item) {
+								if (count($num_item) == 1) {
+									$items = $item["code"];
+									$qty += $item["quantity"];
+								} else {
+									$items .= '+' . $item["code"];
+									$qty += $item["quantity"];
+								}
+							}
+
+							?>
+							<form method="POST" action="initialize.php">
+								<div class="flex-w flex-m m-r-20 m-tb-5">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email" value="<?php echo $cus_email; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone" value="<?php echo $cus_phone; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items" placeholder="Customer's Items" value="<?php echo $items; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="quantity" placeholder="Quantity" value="<?php echo $qty; ?>">
+									<input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="amount" placeholder="Amount" value="<?php echo $total_price; ?>">
+								</div>
+								<button name="pay" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" type="submit">
+									Check Out
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php
+	} else {
+	?>
+		<div class="wrap-header-cart js-panel-cart">
+			<div class="s-full js-hide-cart"></div>
+			<div class="header-cart flex-col-l p-l-65 p-r-25">
+				<div class="header-cart-title flex-w flex-sb-m p-b-8">
+					<span class="mtext-103 cl2">
+						Your Cart
+					</span>
+
+					<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+						<i class="zmdi zmdi-close"></i>
+					</div>
+				</div>
+
+				<div class="no-records">Your Cart is Empty</div>
+				<div class="header-cart-buttons flex-w w-full">
+					<a href="product.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						Shop Now
+					</a>
+
+					<!-- <a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a> -->
+				</div>
+			</div>
+		</div>
+
+	<?php
+	}
+	?>
+
+
+	<!-- Content page -->
+	<section class="bg0 p-t-104 p-b-116">
+		<div class="container">
+			<div class="flex-w flex-tr">
+				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+					<form method="post" name="customerLogin">
+						<h4 class="mtext-105 cl2 txt-center p-b-30">
+							Change Your Password
+						</h4>
+						<?php echo $status; ?>
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="pwd" placeholder="Enter new password">
+							<img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
+						</div>
+						<div class="right error"><?php echo $input_err; ?> </div>
+
+						<div class="bor8 m-b-20 how-pos4-parent">
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="npwd" placeholder="Re-enter your new password">
+							<img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
+						</div>
+						<div class="right error"><?php echo $input_err; ?> </div>
+
+						<button name="changepwd" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+							Change Password
+						</button>
+					</form>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
 
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
