@@ -38,6 +38,7 @@ if (!empty($_GET["action"])) {
 					}
 				}
 			}
+
 			//}
 			break;
 
@@ -545,7 +546,7 @@ if (!empty($_GET["action"])) {
 							<i class="zmdi zmdi-search"></i>
 						</button>
 
-						<input id="searchkey" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search" onKeyup="searchbykey(this.value);">
+						<input id="searchkey" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
 					</div>
 				</div>
 				<!-- Filter -->
@@ -757,7 +758,8 @@ if (!empty($_GET["action"])) {
 
 			?>
 			<!-- Product grids -->
-			<div class="row isotope-grid">
+
+			<div id="displaySearchProducts" class="row isotope-grid">
 				<?php
 				$array_list = array();
 				$sql = mysqli_query($conn, "SELECT * FROM products LIMIT $offset, $no_of_records_per_page");
@@ -813,7 +815,8 @@ if (!empty($_GET["action"])) {
 				}
 				?>
 
-
+				<!-- <div id="displaySearchProducts" class="row isotope-grid">
+				</div> -->
 			</div>
 
 			<!-- Modal1 -->
@@ -933,7 +936,7 @@ if (!empty($_GET["action"])) {
 														</div>
 													</div>
 
-													<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+													<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 														Add to cart
 													</button>
 									</form>
@@ -1324,51 +1327,42 @@ if (!empty($_GET["action"])) {
 	</script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
+
 	<script>
-		function searchbykey(val) {
-			// var keywords = $('#searchkey').value();
-			//console.log(val);
-			$.ajax({
-				url: 'includes/products.php',
-				method: 'POST',
-				data: "search_str=" + val,
-				success: function(data) {
-					$('#searchproducts').html(data);
+		//Getting value from "ajax.php".
+		$(document).ready(function() {
+			$("#searchkey").keyup(function() {
+				$('#displayProducts').hide();
+				var keywords = $('#searchkey').val();
+				console.log(keywords);
+				if (keywords == "") {
+					//Assigning empty value to "display" div in "search.php" file.
+					$("#displayProducts").html("No result found!");
+				} else {
+					//AJAX is called.
+					$.ajax({
+						//AJAX type is "Post".
+						type: "POST",
+						//Data will be sent to "ajax.php".
+						url: "includes/products.php",
+						//Data, that will be sent to "ajax.php".
+						data: {
+							//Assigning value of "name" into "search" variable.
+							search: keywords
+						},
+						//If result found, this funtion will be called.
+						success: function(html) {
+							//Assigning result to "display" div in "search.php" file.
+							$("#displaySearchProducts").html(html);
+						}
+
+					});
 				}
 			});
-		}
-		$(document).ready(function() {
-			/* products();
-
-						$('body').delegate('.js-show-modal1', 'click', function(e) {
-							e.preventDefault();
-							$('.js-modal1').addClass('show-modal1');
-						}) */
-
-			/* $('body').delegate('.js-show-modal1', 'click', function(e) {
-				e.preventDefault();
-				var pid = $(this).attr('pid');
-				alert(pid);
-				$.ajax({
-					url: 'includes/products.php',
-					method: 'POST',
-					data: {
-						productdetails: 1,
-						pid: pid
-					},
-					success: function(data) {
-						$('#allproducts').html(data);
-					}
-				})
-
-			}) */
-
-			/* $('.js-hide-modal1').on('click', function() {
-				$('.js-modal1').removeClass('show-modal1')
-			}) */
 		});
-	</script> -->
 
+		//searchkey
+	</script>
 </body>
 
 </html>

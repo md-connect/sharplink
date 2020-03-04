@@ -1,9 +1,12 @@
 <?php session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
-} elseif (empty($_SESSION['cart_item'])) {
+    die();
+}
+if (empty($_SESSION['cart_item'])) {
     header("Location: product.php");
-} elseif (!isset($_POST['pay'])) {
+}
+if (!isset($_POST['pay'])) {
     header("Location: shoping-cart.php");
 }
 
@@ -18,8 +21,8 @@ function test_input($data)
 }
 
 $curl = curl_init();
-if (isset($_POST['pay']) && !empty($_POST['cus_email']) && !empty($_POST['cus_phone'])) {
-    $email = filter_var(test_input($_POST['cus_email']), FILTER_SANITIZE_EMAIL);
+if (isset($_POST['pay'])) {
+    $email = $_SESSION['username'];
     $amount = $_POST['amount'] * 100;  //the amount in kobo. 
     //$pid = test_input($_POST['items']);
 
@@ -40,7 +43,7 @@ if (isset($_POST['pay']) && !empty($_POST['cus_email']) && !empty($_POST['cus_ph
     //echo $amount;
     //die();
     // url to go to after payment
-    $callback_url = 'localhost/projects/sharplink/callback.php';
+    $callback_url = './pay/callback.php';
 
     curl_setopt_array($curl, array(
         CURLOPT_URL => "https://api.paystack.co/transaction/initialize",
