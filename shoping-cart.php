@@ -1,4 +1,6 @@
 <?php session_start();
+$_SESSION['rdrurl'] = $_SERVER['REQUEST_URI'];
+
 if (isset($_SESSION['username'])) {
 	$cus_id = $_SESSION['cus_id'];
 	$cus_email = $_SESSION['username'];

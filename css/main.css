@@ -448,7 +448,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .sub-menu > li:hover > a {
-  color:darkorange;
+  color: darkorange;
   text-decoration: none;
 }
 
@@ -1276,7 +1276,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .rs2-slick1 .arrow-slick1:hover {
-  color:darkorange;
+  color: darkorange;
 }
 
 .wrap-slick1-dots {
@@ -1753,7 +1753,7 @@ button.mfp-close {
 }
 
 .filter-link-active {
-  color:darkorange;
+  color: darkorange;
   border-bottom: 1px solid darkorange;
 }
 
@@ -1979,16 +1979,12 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .block1-txt {
-  background-color: rgba(103, 117, 214, 0.0);
+  background-color: rgba(103,117,214,0.0);
 }
 
 /*---------------------------------------------*/
-.block1-name {
-  color: #333;
-}
-.block1-info {
-  color: #555;
-}
+.block1-name {color: #333;}
+.block1-info {color: #555;}
 
 /*---------------------------------------------*/
 .block1-txt-child2 {
@@ -2011,7 +2007,7 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .block1-txt:hover {
-  background-color: darkorange;
+  background-color: rgba(255, 153, 0, 0.8);
 }
 
 .block1-txt:hover .block1-txt-child2 {
@@ -2034,6 +2030,7 @@ input.num-product::-webkit-inner-spin-button {
 .block1-txt:hover .block1-info {
   color: #fff;
 }
+
 
 /*//////////////////////////////////////////////////////////////////
 [ Block2 ]*/
@@ -2121,7 +2118,7 @@ input.num-product::-webkit-inner-spin-button {
   color: #fff;
 }
 .cl1 {
-  color: #darkorange;
+  color: darkorange;
 }
 .cl2 {
   color: #333;
@@ -3128,7 +3125,7 @@ input.num-product::-webkit-inner-spin-button {
   color: darkorange;
 }
 .hov-bg1:hover {
-  background-color:darkorange;
+  background-color: darkorange;
 }
 
 /*---------------------------------------------*/

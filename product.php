@@ -1,5 +1,6 @@
 <?php session_start();
 include("includes/dbconfig.php");
+$_SESSION['rdrurl'] = $_SERVER['REQUEST_URI'];
 
 //code for Cart
 if (!empty($_GET["action"])) {
@@ -967,8 +968,7 @@ if (!empty($_GET["action"])) {
 				</div>
 			</div>
 		</div>
-		</div>
-		</div>
+
 
 		<!-- Load more -->
 		<div class="flex-c-m flex-w w-full p-t-45">

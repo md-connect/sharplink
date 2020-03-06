@@ -1,18 +1,12 @@
 <?php session_start();
-if (isset($_SESSION['username'])) {
-    header("Location: index.php");
-    exit();
-}
-include('includes/dbconfig.php');
+include('./includes/dbconfig.php');
+$errors = "";
 $input_err = "";
-$lgn_input_err = "";
-$lgn_status = "";
 $status = "";
-$username = "";
-$pwd = "";
+
 function test_input($data)
 {
-    include("./includes/dbconfig.php");
+    include("../includes/dbconfig.php");
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -20,168 +14,151 @@ function test_input($data)
     return $data;
 }
 
-if (isset($_POST['login'])) {
-    if (empty($_POST["username"])) {
-        $username = "";
-        $lng_input_err = "* This field is required";
+
+$id = $_GET['id'];
+
+//* Measurement uploading scripts */
+if (isset($_POST['add-measurement'])) {
+    if (empty($_POST["t_len"])) {
+        $t_len = "";
+        $input_err = "* This field is required";
     } else {
-        $username = test_input($_POST['username']);
+        $t_len = test_input($_POST['t_len']);
     }
-    if (empty($_POST["pwd"])) {
-        $pwd = "";
-        $lng_input_err = "* This field is required";
+    if (empty($_POST["t_waist"])) {
+        $t_waist = "";
+        $input_err = "* This field is required";
     } else {
-        $pwd = test_input($_POST['pwd']);
+        $t_waist = test_input($_POST['t_waist']);
+    }
+
+
+    if (empty($_POST["t_flap"])) {
+        $t_flap = "";
+        $input_err = "* This field is required";
+    } else {
+        $t_flap = test_input($_POST['t_flap']);
+    }
+
+    if (empty($_POST["t_lap"])) {
+        $t_lap = "";
+        $input_err = "* This field is required";
+    } else {
+        $t_lap = test_input($_POST["t_lap"]);
+    }
+
+    if (empty($_POST["t_hip"])) {
+        $t_hip = "";
+        $input_err = "* This field is required";
+    } else {
+        $t_hip = test_input($_POST['t_hip']);
+    }
+
+    if (empty($_POST["t_knee"])) {
+        $t_knee = "";
+        $input_err = "* This field is required";
+    } else {
+        $t_knee = test_input($_POST['t_knee']);
+    }
+    if (empty($_POST["t_feet"])) {
+        $t_feet = "";
+        $input_err = "* This field is required";
+    } else {
+        $t_feet = test_input($_POST['t_feet']);
+    }
+    if (empty($_POST["s_glen"])) {
+        $s_glen = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_glen = test_input($_POST['s_glen']);
+    }
+    if (empty($_POST["s_len"])) {
+        $s_len = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_len = test_input($_POST['s_len']);
+    }
+
+
+    if (empty($_POST["s_chest"])) {
+        $s_chest = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_chest = test_input($_POST['s_chest']);
+    }
+
+    if (empty($_POST["s_stomach"])) {
+        $s_stomach = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_stomach = test_input($_POST["s_stomach"]);
+    }
+
+    if (empty($_POST["s_shoulder"])) {
+        $s_shoulder = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_shoulder = test_input($_POST['s_shoulder']);
+    }
+
+    if (empty($_POST["s_neck"])) {
+        $s_neck = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_neck = test_input($_POST['s_neck']);
+    }
+    if (empty($_POST["s_arm"])) {
+        $s_arm = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_arm = test_input($_POST['s_arm']);
+    }
+    if (empty($_POST["s_wrist"])) {
+        $s_wrist = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_wrist = test_input($_POST['s_wrist']);
+    }
+
+    if (empty($_POST["s_sleeve"])) {
+        $s_sleeve = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_sleeve = test_input($_POST['s_sleeve']);
+    }
+    if (empty($_POST["s_rsleeve"])) {
+        $s_rsleeve = "";
+        $input_err = "* This field is required";
+    } else {
+        $s_rsleeve = test_input($_POST['s_rsleeve']);
     }
 
     if ($input_err == "") {
-        $hash = password_hash($pwd, PASSWORD_DEFAULT);
-        $query_user = "SELECT * FROM customers WHERE email='$username'";
-        if (($query = mysqli_query($conn, $query_user)) && (mysqli_num_rows($query) == 1)) {
-            $row = mysqli_fetch_assoc($query);
-            $hash = $row['pwd'];
-            if (password_verify($pwd, $hash)) {
-                $_SESSION['auth'] = true;
-                $_SESSION['cus_id'] = $row['cus_id'];
-                $_SESSION['username'] = $row['email'];
-                $_SESSION['cus_name'] = $row['name'];
-                $_SESSION['cus_phone'] = $row['phone'];
-                $_SESSION['address'] = $row['address'];
-                $_SESSION['cus_image'] = $row['image'];
-                $id =  $_SESSION['cus_id'];
-                if (isset($_SESSION['rdrurl'])) {
-                    //redirecting user back to the previous page
-                    header('location: ' . $_SESSION['rdrurl']);
-                } else {
-                    //echo $_SESSION['username'];
-                    header("Location: index.php");
-                }
-            } else {
-                $lgn_status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Incorrect login details!</strong>
-          </div>';
-            }
-        } else {
-            $lgn_status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>User does not exist!</strong>
-          </div>';
-        }
-    } else {
-        $lgn_status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Please fill all fields.</strong>
-          </div>';
-    }
-}
-
-/* Sign Up scripts */
-if (isset($_POST['signup'])) {
-    if (empty($_POST["name"])) {
-        $name = "";
-        $input_err = "* This field is required";
-    } else {
-        $name = test_input($_POST['name']);
-    }
-
-    if (empty($_POST["email"])) {
-        $email = "";
-        $input_err = "* This field is required";
-    } else {
-        $email = test_input($_POST['email']);
-    }
-
-    if (empty($_POST["phone"])) {
-        $phone = "";
-        $input_err = "* This field is required";
-    } else {
-        $phone = test_input($_POST["phone"]);
-    }
-
-    if (empty($_POST["address"])) {
-        $address = "";
-        $input_err = "* This field is required";
-    } else {
-        $address = test_input($_POST['address']);
-    }
-
-    if (empty($_POST["pwd"])) {
-        $pwd = "";
-        $input_err = "* This field is required";
-    } else {
-        $pwd = test_input($_POST['pwd']);
-    }
-
-    if (empty($_POST["npwd"])) {
-        $npwd = "";
-        $input_err = "* This field is required";
-    } else {
-        $npwd = test_input($_POST['npwd']);
-    }
-
-    $errors = array();
-    $passport_name = $_FILES['passport']['name'];
-    $temp = $_FILES['passport']['tmp_name'];
-    $types = $_FILES['passport']['type'];
-    $extension = array("jpeg", "jpg", "png", "gif");
-
-    $bytes = 20;
-    $KB = 1024;
-    $totalBytes = $bytes * $KB;
-    if ($_FILES["passport"]["size"][$temp] > $totalBytes) {
-        $UploadOk = false;
-        $status .= $passport_name . " file size is larger than the 20KB.";
-    }
-
-    $ext = pathinfo($passport_name, PATHINFO_EXTENSION);
-    if (in_array($ext, $extension) == false) {
-        $UploadOk = false;
-        $status .= $passport_name . " is invalid file type.";
-    }
-
-    if (file_exists("images/passports" . "/" . $passport_name) == true) {
-        $UploadOk = false;
-        $status .= $passport_name . " file is already exist.";
-    }
-
-    $check = mysqli_query($conn, "SELECT email FROM customers WHERE email='$email'");
-    if (mysqli_num_rows($check) == 1) {
-        $status .= '<div class="alert alert-danger">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Email has been used by another customer!</strong>
-</div>';
-    } else {
-        if ($input_err == "") {
-            $hash = password_hash($pwd, PASSWORD_DEFAULT);
-            $insert = mysqli_query($conn, "INSERT INTO customers (name, email, phone, address, image, pwd) 
-                VALUES('$name', '$email', '$phone', '$address', '$passport_name', '$hash')");
-            if ($insert) {
-                $status .= '<div class="alert alert-success">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Registeration was successfull, kindly proceed to login for you to place your order(s) now!</strong>
-</div>';
-            } else {
-                $status .= '<div class="alert alert-danger">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Unable to register customer currently, please try again later.</strong>
-</div>';
-            }
+        $insert = mysqli_query($conn, "UPDATE customers SET (t_len='$t_len', t_waist='$t_waist', t_flap='$t_flap', t_lap='$t_lap', t_hip='$t_hip', t_knee='$t_knee', t_feet='$t_feet', s_glen='$s_glen', s_len='$s_len', s_chest='$s_chest', s_stomach='$s_stomach', s_shoulder='$s_shoulder', s_neck='$s_neck', s_arm='$s_arm', s_wrist='$s_wrist', s_sleeve='$s_sleeve', s_rsleeve='$s_rsleeve') WHERE cus_id='$pd_id'");
+        if ($insert) {
+            $status .= '<div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Measurement was uploaded successfully!</strong>
+                        </div>';
         } else {
             $status .= '<div class="alert alert-danger">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>Please fill all fields.</strong>
-          </div>';
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Unable upload measurement into the database currently, please try again later.</strong>
+                        </div>';
         }
+    } else {
+        $status .= '<div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Some important field(s) are empty.</strong>
+                    </div>';
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Sharplink | Login</title>
+    <title>Shopping Cart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -208,16 +185,6 @@ if (isset($_POST['signup'])) {
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
-
-    <style>
-        .right {
-            text-align: right;
-        }
-
-        .error {
-            color: red;
-        }
-    </style>
 </head>
 
 <body class="animsition">
@@ -279,7 +246,7 @@ if (isset($_POST['signup'])) {
                                 <a href="product.php">Shop</a>
                             </li>
 
-                            <li class="label1" data-label1="hot">
+                            <li class="label1 active-menu" data-label1="hot">
                                 <a href="shoping-cart.php">Features</a>
                             </li>
 
@@ -308,14 +275,16 @@ if (isset($_POST['signup'])) {
                                     <li>
                                         <?php
                                         if (isset($_SESSION['username'])) {
+                                            $id = $_SESSION['cus_id'];
                                         ?>
                                             <div class="dropdown">
                                                 <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="zmdi zmdi-account-o" style="color: green;"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-item">Account</div>
+                                                    <a class="dropdown-item" href="account.php">My Account</a>
                                                     <a class="dropdown-item" href="account.php">My Orders</a>
+                                                    <a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
                                                     <a class="dropdown-item" href="logout.php">Log Out</a>
                                                 </div>
                                             </div>
@@ -368,14 +337,16 @@ if (isset($_POST['signup'])) {
                     <li>
                         <?php
                         if (isset($_SESSION['username'])) {
+                            $id = $_SESSION['cus_id'];
                         ?>
                             <div class="dropdown">
                                 <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="zmdi zmdi-account-o" style="color: green;"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-item">Account</div>
+                                    <a class="dropdown-item" href="account.php">My Account</a>
                                     <a class="dropdown-item" href="account.php">My Orders</a>
+                                    <a class="dropdown-item" href="change-password.php?id=<?php echo $id; ?>">Change Password</a>
                                     <a class="dropdown-item" href="logout.php">Log Out</a>
                                 </div>
                             </div>
@@ -445,7 +416,7 @@ if (isset($_POST['signup'])) {
                     <a href="product.php">Shop</a>
                 </li>
 
-                <li class="label1" data-label1="hot">
+                <li class="label1 active-menu data-label1=" hot">
                     <a href="shoping-cart.php">Features</a>
                 </li>
 
@@ -538,9 +509,34 @@ if (isset($_POST['signup'])) {
                                 View Cart
                             </a>
 
-                            <a href="initialize.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                                Check Out
-                            </a>
+                            <?php
+                            $items = "";
+                            $qty = 0;
+                            $num_item = ($_SESSION["cart_item"]);
+                            // die();
+                            foreach ($_SESSION["cart_item"] as $item) {
+                                if (count($num_item) == 1) {
+                                    $items = $item["code"];
+                                    $qty += $item["quantity"];
+                                } else {
+                                    $items .= '+' . $item["code"];
+                                    $qty += $item["quantity"];
+                                }
+                            }
+
+                            ?>
+                            <form method="POST" action="initialize.php">
+                                <div class="flex-w flex-m m-r-20 m-tb-5">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_email" placeholder="Customer's Email" value="<?php echo $cus_email; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="cus_phone" placeholder="Customer's Phone" value="<?php echo $cus_phone; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="items" placeholder="Customer's Items" value="<?php echo $items; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="quantity" placeholder="Quantity" value="<?php echo $qty; ?>">
+                                    <input hidden class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="amount" placeholder="Amount" value="<?php echo $total_price; ?>">
+                                </div>
+                                <button name="pay" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" type="submit">
+                                    Check Out
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -562,7 +558,9 @@ if (isset($_POST['signup'])) {
                     </div>
                 </div>
 
-                <div class="no-records">Your Cart is Empty</div>
+                <div class="no-records">
+                    <h3 style="text-align: center; padding-bottom: 50px;">Your Cart is Empty</h3>
+                </div>
                 <div class="header-cart-buttons flex-w w-full">
                     <a href="product.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                         Shop Now
@@ -579,7 +577,6 @@ if (isset($_POST['signup'])) {
     }
     ?>
 
-
     <!-- breadcrumb -->
     <div class="container">
         <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -589,103 +586,111 @@ if (isset($_POST['signup'])) {
             </a>
 
             <span class="stext-109 cl4">
-                Login | Sign Up
+                Design Upload Form
             </span>
         </div>
     </div>
-
+    <!-- End of flyout cart -->
     <!-- Content page -->
-    <section class="bg0 p-t-104 p-b-116">
+    <section class="bg0 p-t-104 p-b-116" style="padding-left: 30%;">
         <div class="container">
-            <div class="flex-w flex-tr">
-                <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form method="post" name="customerLogin">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <?php echo $status; ?>
+                <div class="flex-w flex-tr">
+                    <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
-                            Login Here
+                            DESIGN UPLOAD
                         </h4>
-                        <?php echo $lgn_status; ?>
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="username" placeholder="Your Username">
-                            <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $lgn_input_err; ?> </div>
 
                         <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="pwd" placeholder="Your Password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="pd_name" placeholder="Enter product name">
                         </div>
-                        <div class="right error"><?php echo $lgn_input_err; ?> </div>
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="desc" placeholder="Enter Product Description">
+                        </div>
+                        <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                            <select class="js-select2" name="pd_category">
+                                <option>Select a Product Category...</option>
+                                <option value="men">Men</option>
+                                <option value="women">Women</option>
+                                <option value="children">Children</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                        <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                            <select class="js-select2" name="pd_type">
+                                <option>Select a Product Type...</option>
+                                <option value="native">Natives</option>
+                                <option value="suit">Suits</option>
+                                <option value="senator">Senator Materials</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
 
-                        <button name="login" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                            Login
+                        <div class="bor8 m-b-20 how-pos4-parent">
+                            <label style="padding-left: 10%;" for="input-id" class="">You can select up to 3 images for the same design</label>
+                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="file" name="images[]" placeholder="Choose images" multiple>
+                        </div>
+
+
+                        <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" name="upload-design" type="submit">
+                            upload <Measurement></Measurement>
                         </button>
-                        <a href="#">Forgot password?</a>
-                    </form>
-                </div>
+            </form>
+        </div>
 
-                <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
-                    <form method="post" enctype="multipart/form-data" name="customerReg">
-                        <h4 class="mtext-105 cl2 txt-center p-b-30">
-                            Sign Up Here
-                        </h4>
-                        <?php echo $status; ?>
+        <!-- <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+                    <div class="flex-w w-full p-b-42">
+                        <span class="fs-18 cl5 txt-center size-211">
+                            <span class="lnr lnr-map-marker"></span>
+                        </span>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="name" placeholder="Enter your Full name">
-                            <img class="how-pos4 pointer-none" src="images/icons/user.png" alt="ICON">
+                        <div class="size-212 p-t-2">
+                            <span class="mtext-110 cl2">
+                                Address
+                            </span>
+
+                            <p class="stext-115 cl6 size-213 p-t-18">
+                                Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
+                            </p>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
+                    </div>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Enter your Email Address">
-                            <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+                    <div class="flex-w w-full p-b-42">
+                        <span class="fs-18 cl5 txt-center size-211">
+                            <span class="lnr lnr-phone-handset"></span>
+                        </span>
+
+                        <div class="size-212 p-t-2">
+                            <span class="mtext-110 cl2">
+                                Lets Talk
+                            </span>
+
+                            <p class="stext-115 cl1 size-213 p-t-18">
+                                +1 800 1236879
+                            </p>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
+                    </div>
 
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="phone" placeholder="Enter your Mobile Number">
-                            <img class="how-pos4 pointer-none" src="images/icons/phone.png" alt="ICON">
+                    <div class="flex-w w-full">
+                        <span class="fs-18 cl5 txt-center size-211">
+                            <span class="lnr lnr-envelope"></span>
+                        </span>
+
+                        <div class="size-212 p-t-2">
+                            <span class="mtext-110 cl2">
+                                Sale Support
+                            </span>
+
+                            <p class="stext-115 cl1 size-213 p-t-18">
+                                contact@example.com
+                            </p>
                         </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
-
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="address" placeholder="Enter your Home Address">
-                            <img class="how-pos4 pointer-none" src="images/icons/address.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
-
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="pwd" placeholder="Choose a Password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
-
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="npwd" placeholder="Confirm your Password">
-                            <img class="how-pos4 pointer-none" src="images/icons/password.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
-
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="file" name="passport">
-                            <img class="how-pos4 pointer-none" src="images/icons/user.png" alt="ICON">
-                        </div>
-                        <div class="right error"><?php echo $input_err; ?> </div>
-
-                        <button name="signup" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
-                            Sign Up
-                        </button>
-
-                    </form>
-                </div>
-            </div>
+                    </div>
+                </div> -->
+        </div>
         </div>
     </section>
-
-
-
-
-
     <!-- Footer -->
     <footer class="bg3 p-t-75 p-b-32">
         <div class="container">
